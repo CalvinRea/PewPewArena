@@ -1,0 +1,61 @@
+2016
+
+JAVA
+make sure < or > right way round 
+use .equalsIgnoreCase() not == for strings 
+1hr 10 mins for 80 not 90 too many errors
+2hr 30 mins for perfection
+
+SQL
+55 mins for 35/40, 87%
+ORDER BY Name,Age
+the above orders by the first field then by the second field
+eg.
+Bob   6
+Bob   25
+Cindy 14
+INSERT INTO table (Column1,Column2,...)
+VALUES() or for select
+INSERT INTO table (Column1,Column2,...)
+SELECT Name,9,True//hardcoded values overide and name is found at ID
+FROM tblNames
+WHERE ID=6
+
+OVERALL
+92% for 3hrs 25 mins :(
+
+
+2019
+SQL
+
+NOT IN() not {}
+where 
+group by//add if certain thing says is not part of aggregate function to add it to aggregate function
+having
+
+JAVA
+null checks to save time if value can be null
+
+OVERALL
+98-100%
+2hrs 20mins
+add 34 mins timer
+
+2020
+chips but remember casts
+•	CBool(<expression>)
+•	CByte(<expression>)
+•	CCur(<expression>)
+•	CDate(<expression>)
+•	CDbl(<expression>)
+•	CDec(<expression>)
+•	CInt(<expression>)
+•	CLng(<expression>)
+•	CSng(<expression>)
+•	CStr(<expression>)
+•	CVar(<expression>)
+
+SQL-45 mins 
+JAVA 
+in childs constructor super(); for parents
+super.method() in child can only access public and protected methods
