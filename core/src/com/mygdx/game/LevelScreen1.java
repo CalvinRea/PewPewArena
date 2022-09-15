@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class LevelScreen1 extends ScreenAdapter {
-    //TODO: implement player damage system
+    //TODO: fix the ai to work with new player model
     MusicManager musicManager;
     MyGdxGame game;
     Player player;
