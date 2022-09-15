@@ -147,7 +147,7 @@ EvWizzEnemy evWizzEnemy;
         player.getAp9().sprite.draw(batch);//280 width 280 height
         if(player.getAp9().bullets!=null){
             for (int i = 0; i <player.getAp9().bullets.size() ; i++) {
-                if(player.getAp9().bullets.get(i).alive==true)
+                if(player.getAp9().bullets.get(i).alive)
                 batch.draw(player.getAp9().bullets.get(i).animation.getKeyFrame(timeElapsed),player.getAp9().bullets.get(i).x,player.getAp9().bullets.get(i).y,30,30);
             }
         }
@@ -177,6 +177,7 @@ EvWizzEnemy evWizzEnemy;
 
     public Label updateScore(int score){
         BitmapFont bitFont = new BitmapFont(Gdx.files.internal("Temp assets folder/GameFont.fnt"));
+
         bitFont.getData().setScale(3f);
         Label.LabelStyle style = new Label.LabelStyle(bitFont,Color.WHITE);
         Label label = new Label(Integer.toString(score),style);
