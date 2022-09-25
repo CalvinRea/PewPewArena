@@ -14,7 +14,7 @@ public class MusicManager {
         musicList.add(Gdx.audio.newMusic(Gdx.files.internal("Temp assets folder/Music/Robin Hustin - On Fire [NCS Release].mp3")));
         musicList.add(Gdx.audio.newMusic(Gdx.files.internal("Temp assets folder/Music/Clarx - H.A.Y [NCS Release].mp3")));
         for (Music m : musicList) {
-            m.setVolume(1f);
+            m.setVolume(0f);
             m.setLooping(false);
         }
     }

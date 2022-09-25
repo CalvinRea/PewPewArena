@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class LevelScreen1 extends ScreenAdapter {
+public class LevelScreen extends ScreenAdapter {
     MusicManager musicManager;
     MyGdxGame game;
     Player player;
@@ -19,12 +19,12 @@ public class LevelScreen1 extends ScreenAdapter {
     PlayerHealthbar playerHealthbar;
     BossHealthbar bossHealthbar;
     Torch torch;
-UndeadExecutioner undeadExecutioner;
-EvWizzEnemy evWizzEnemy;
+    UndeadExecutioner undeadExecutioner;
+    EvWizzEnemy evWizzEnemy;
 
     float timeElapsed = 0;
 
-    public LevelScreen1(MyGdxGame game, Player player) {
+    public LevelScreen(MyGdxGame game, Player player) {
         this.game = game;
         this.player = player;
 
@@ -160,7 +160,7 @@ EvWizzEnemy evWizzEnemy;
         player.setY(60);
         originalY = player.getY();
         evWizzEnemy.y = -110;
-        evWizzEnemy.x = 10000;
+        evWizzEnemy.x = 900;
         undeadExecutioner.x = 500;
         undeadExecutioner.y = -250;
     }

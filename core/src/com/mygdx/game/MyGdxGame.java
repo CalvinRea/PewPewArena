@@ -15,10 +15,10 @@ public class MyGdxGame extends Game {
         //screen.dispose();after change
 
 
-        //setScreen(new LoadingScreen(this));//automatically calls screen.show and screen.render
-        //if switch to different screen screen.hide automatically called
 
-        setScreen(new LevelScreen1((this), new Player(null)));
+        //if switch to different screen screen.hide automatically called
+          setScreen(new MainMenu(this));
+        //setScreen(new LevelScreen((this), new Player()));
         //setScreen(new LoginSignupScreen(this));
 
     }

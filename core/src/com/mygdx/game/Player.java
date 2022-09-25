@@ -24,7 +24,6 @@ public class Player {
 
     private AP9 ap9;
     private int score;
-    private String inventory;
     private boolean isJumping;
     private int x;
     private int y;
@@ -39,9 +38,8 @@ public class Player {
     private boolean flipped;
     private int xOffSet;
 
-    public Player(String inventory) {
+    public Player() {
         ap9 = new AP9();
-        this.inventory = inventory;
         x = 20;
         y = 20;
         xOffSet=0;
@@ -67,16 +65,18 @@ public class Player {
 
     public void controls(int originalY,float timeElapsed,PlayerHealthbar healthbar) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) && x>-100 ) {
             x -= 20;
             isMoving=true;
             flipped=true;
             xOffSet=80;
-        }else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+
+        }else if (Gdx.input.isKeyPressed(Input.Keys.D) && x<1800) {
             x += 20;
             isMoving=true;
             flipped=false;
             xOffSet=0;
+
         }else{isMoving=false;}
 
         if (!isJumping) {
@@ -113,17 +113,6 @@ public class Player {
 
         animation=new Animation(0.1f,animationTextures[state]);
 
-    }
-
-
-
-    public String getInventory() {
-        return inventory;
-    }
-
-
-    public void setInventory(String newInventory) {
-        this.inventory = newInventory;
     }
 
     public int getX() {

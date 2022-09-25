@@ -25,11 +25,9 @@ public class MainMenu extends ScreenAdapter {
     int numFrames;
     Animation<Texture> mainMenu;
     Music music;
-    String username;
 
-    public MainMenu(MyGdxGame game, String username) {
+    public MainMenu(MyGdxGame game) {
         this.game = game;
-        this.username = username;
     }
 
     @Override
@@ -44,7 +42,7 @@ public class MainMenu extends ScreenAdapter {
         timeElapsed = 0f;
         arr = new Texture[numFrames];
         populateTextArray();
-        mainMenu = new Animation<Texture>(0.033f, arr);
+        mainMenu = new Animation<>(0.033f, arr);
         stageInitializer();
     }
 
@@ -93,59 +91,33 @@ public class MainMenu extends ScreenAdapter {
         buttonStyle.fontColor = (Color.WHITE);
 
         buttonStyle.font = new BitmapFont(Gdx.files.internal("Temp assets folder/GameFont.fnt"));
-
-        TextButton btnNewGame = new TextButton("New Game", buttonStyle);
-        TextButton btnContinue = new TextButton("Continue", buttonStyle);
-        TextButton btnDifficulty = new TextButton("Difficulty Settings", buttonStyle);
-        TextButton btnGraphics = new TextButton("Graphics Settings", buttonStyle);
+        buttonStyle.font.getData().setScale(2f);
+        TextButton btnPlay = new TextButton("Play", buttonStyle);
         TextButton btnControls = new TextButton("Controls", buttonStyle);
         TextButton btnExit = new TextButton("Exit", buttonStyle);
 
-        final MainMenuFunctionality mainMenuFunctionality = new MainMenuFunctionality(game, username);
-        btnNewGame.addListener(new ClickListener() {
+    
+        btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                mainMenuFunctionality.newGame();
+                game.setScreen(new LevelScreen(game,new Player()));
             }
         });
-        btnContinue.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                mainMenuFunctionality.continueGame();
-            }
-        });
-        btnDifficulty.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                mainMenuFunctionality.difficutlySettings();
-            }
-        });
-        btnGraphics.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                mainMenuFunctionality.graphicsSettings();
-            }
-        });
+       
         btnControls.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                mainMenuFunctionality.controlls();
+                controls();
             }
         });
         btnExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                mainMenuFunctionality.exit();
+                dispose();
             }
         });
 
-        table.add(btnNewGame).uniform(true).size(stage.getWidth() / 2, stage.getHeight() / 6);
-        table.row();
-        table.add(btnContinue).uniform(true).fill();
-        table.row();
-        table.add(btnDifficulty).uniform(true).fill();
-        table.row();
-        table.add(btnGraphics).uniform(true).fill();
+        table.add(btnPlay).uniform(true).size(stage.getWidth() / 2, stage.getHeight() / 6);
         table.row();
         table.add(btnControls).uniform(true).fill();
         table.row();
@@ -153,5 +125,5 @@ public class MainMenu extends ScreenAdapter {
         return table;
     }
 
-
+    public static void controls(){}
 }

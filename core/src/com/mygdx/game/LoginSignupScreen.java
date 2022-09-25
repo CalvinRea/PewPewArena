@@ -60,7 +60,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         timeElapsed = 0f;
         logTextures = new Texture[logNumFrames];
         populateTextArray();
-        logAnimation = new Animation<Texture>(0.016f, logTextures);
+        logAnimation = new Animation<>(0.016f, logTextures);
         populateList();
         stageInitializer();
 
@@ -164,8 +164,7 @@ public class LoginSignupScreen extends ScreenAdapter {
             public void keyTyped(TextField textField, char c) {
                 try {
                     dayEntry = Integer.parseInt(textField.getText());
-                    if (isWithinRange()) {
-                    } else {
+                    if (!isWithinRange()) {
                         error = "Out of day range";
                         textField.setText("");
                     }
@@ -179,7 +178,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         usernameEntry = usernameEntry.trim();
         passwordEntry = passwordEntry.trim();
 
-        final SelectBox<String> cmbMonth = new SelectBox<String>(monthAppearance);
+        final SelectBox<String> cmbMonth = new SelectBox<>(monthAppearance);
         cmbMonth.setItems("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
         final Slider sldAge = new Slider(0, 100, 1, false, ageAppearance);
@@ -222,7 +221,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         btnRegister.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (usernameEntry != "" || passwordEntry != "") {
+                if (!usernameEntry.equals("")|| !passwordEntry.equals("")) {
                     if (count < 5) {
                         age = (int) sldAge.getValue();
                         if (checkAge()) {//add later validation for if you are a robot
@@ -250,7 +249,7 @@ public class LoginSignupScreen extends ScreenAdapter {
                 if (usernames[0] != null) {
                     boolean exists = searchUserAndPass();
                     if (exists) {
-                        game.setScreen(new MainMenu(game, usernameEntry));
+                        game.setScreen(new MainMenu(game));
                     }
                 }
 
@@ -380,6 +379,7 @@ public class LoginSignupScreen extends ScreenAdapter {
                 writer.close();
                 populateList();
             } catch (IOException ioException) {
+                System.out.println(ioException);
             }
 
         }
