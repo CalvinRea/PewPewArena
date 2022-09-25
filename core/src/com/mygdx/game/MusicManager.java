@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import java.util.ArrayList;
 
 public class MusicManager {
-    private ArrayList<Music> musicList = new ArrayList<Music>();
+    private ArrayList<Music> musicList = new ArrayList<>();
 
     private int i =0;
 

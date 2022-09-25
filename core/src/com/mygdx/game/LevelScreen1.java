@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class LevelScreen1 extends ScreenAdapter {
-    //TODO: fix the ai to work with new player model
     MusicManager musicManager;
     MyGdxGame game;
     Player player;
@@ -56,7 +55,6 @@ EvWizzEnemy evWizzEnemy;
         graphics();
         enemyDamage();//TODO: if not alive don't draw
         aiThink();
-        updateScore(player.getScore());//TODO: call this only after enemy set alive false
         musicManager.playMusic();
     }
 
@@ -72,9 +70,6 @@ EvWizzEnemy evWizzEnemy;
         background.dispose();
         batch.dispose();
     }//call to dispose
-
-    public void nextLevel() {
-    }
 
     public void flipper() {
         int playerX = player.getX();
@@ -165,7 +160,7 @@ EvWizzEnemy evWizzEnemy;
         player.setY(60);
         originalY = player.getY();
         evWizzEnemy.y = -110;
-        evWizzEnemy.x = 1000;
+        evWizzEnemy.x = 10000;
         undeadExecutioner.x = 500;
         undeadExecutioner.y = -250;
     }
@@ -175,13 +170,6 @@ EvWizzEnemy evWizzEnemy;
     musicManager.playMusic();
     }
 
-    public Label updateScore(int score){
-        BitmapFont bitFont = new BitmapFont(Gdx.files.internal("Temp assets folder/GameFont.fnt"));
 
-        bitFont.getData().setScale(3f);
-        Label.LabelStyle style = new Label.LabelStyle(bitFont,Color.WHITE);
-        Label label = new Label(Integer.toString(score),style);
-        return label;
-    }
 
 }

@@ -37,12 +37,14 @@ public class Player {
     private double lastHealth;
     private boolean isMoving;
     private boolean flipped;
+    private int xOffSet;
 
     public Player(String inventory) {
         ap9 = new AP9();
         this.inventory = inventory;
         x = 20;
         y = 20;
+        xOffSet=0;
         populateTextures();
         isJumping = false;
         isMoving = false;
@@ -69,10 +71,12 @@ public class Player {
             x -= 20;
             isMoving=true;
             flipped=true;
+            xOffSet=80;
         }else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             x += 20;
             isMoving=true;
             flipped=false;
+            xOffSet=0;
         }else{isMoving=false;}
 
         if (!isJumping) {
@@ -178,13 +182,8 @@ public class Player {
         return flipped;}
 
     public void alignHitBoxes(){
-        HitBoxX=x;
+        HitBoxX=x+xOffSet;
         HitBoxY=y;
-        if(flipped){
-            HitBoxX+=50;
-        }else{
-            HitBoxX-=50;
-        }
     }
 }
 

@@ -25,7 +25,7 @@ public class Enemy extends Entity {
 
 
     protected void move(Player player) {
-        if (player.getX() - (x + xOffSet) > 0) {
+        if (player.getHitBoxX() - (x + xOffSet) > 0) {
             moveRight(speed);
         } else {
             moveLeft(speed);
@@ -75,9 +75,9 @@ public class Enemy extends Entity {
     }
 
     public void dispose(){
-        for (int i = 0; i < animationTextures.length; i++) {
-            for (int j = 0; j < animationTextures[i].length; j++) {
-                animationTextures[i][j].dispose();
+        for (Texture[] animationTexture : animationTextures) {
+            for (Texture texture : animationTexture) {
+                texture.dispose();
             }
         }
         x=10000;

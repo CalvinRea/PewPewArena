@@ -13,14 +13,14 @@ public class UndeadProjectile extends EnemyProjectile {
         originalHealth = 1;
         health = 1;
         damage = 1;
-        damageRangeX = 37;
-        damageRangeY= 70;
+        damageRangeX = 30;
+        damageRangeY= 80;
         xOffSet = 50;
         yOffSet = 50;
         animationTextures = populate();
         speedY = 1;
         speedX = 2;
-        animation = new Animation<Texture>(0.2f, animationTextures[1]);
+        animation = new Animation<>(0.2f, animationTextures[1]);
 
 
             switch (summonNumber) {
@@ -49,13 +49,12 @@ public class UndeadProjectile extends EnemyProjectile {
     }
 
     public void ai(Player player, PlayerHealthbar playerHealthbar, float timeElapsed) {
-        //two states attacking
-        if (Math.abs( x - xOffSet) < player.getHitBoxX()
-                && Math.abs(y-yOffSet) < player.getHitBoxY()) {
-            attack(playerHealthbar, player);
+
+        if (Math.abs(player.getHitBoxX() - (x - xOffSet)) < damageRangeX && Math.abs(player.getHitBoxY() - (y - yOffSet)) < damageRangeY) {
+           attack(playerHealthbar, player);
         }
         if(!creationAnimationFinished && animation.isAnimationFinished(timeElapsed)){
-            animation =new Animation<Texture>(0.2f,animationTextures[0]);
+            animation =new Animation<>(0.2f,animationTextures[0]);
             creationAnimationFinished=true;
         }
             move(player);

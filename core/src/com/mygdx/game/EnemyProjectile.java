@@ -11,15 +11,15 @@ public class EnemyProjectile extends Projectile {
 
     protected void move(Player player) {
         if (tracking) {
-            if (player.getX() - (x + xOffSet) > 0) {
+            if (player.getHitBoxX() - (x - xOffSet) > 0) {
                 moveRight(speedX);
             } else {
                 moveLeft(speedX);
             }
 
-            if (player.getY()+20 - (y + yOffSet) > 0) {
+            if (player.getHitBoxY() - (y - yOffSet) > 0) {
                 moveUp(speedY);
-            } else {
+            } else if(player.getHitBoxY()+70 - (y - yOffSet) < 0){//+80 for player height
                 moveDown(speedY);
             }
         }

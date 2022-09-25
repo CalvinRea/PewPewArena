@@ -8,7 +8,7 @@ public class EvWizzEnemy extends Enemy {
     public EvWizzEnemy() {
         hitBoxX=60;
         hitBoxY=80;
-        hitBoxXOffSet=250;
+        hitBoxXOffSet=250;//these values are right
         hitBoxYOffSet=225;
         originalHealth = 10;
         health = 10;
@@ -20,7 +20,7 @@ public class EvWizzEnemy extends Enemy {
         moveDistance = 1000;
         speed = 2;
         state = 0;
-        enemyAnimation = new Animation<Texture>(0.2f, animationTextures[0]);
+        enemyAnimation = new Animation<>(0.2f, animationTextures[0]);
 
     }
 
@@ -32,7 +32,7 @@ public class EvWizzEnemy extends Enemy {
 
     public void ai(Player player, PlayerHealthbar healthBar, int originalY) {
 
-        if (health <= 0) {
+       if (health <= 0) {
             state = 4;
         } else {
             if (health != originalHealth) {
@@ -40,8 +40,7 @@ public class EvWizzEnemy extends Enemy {
                 originalHealth = health;
             } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < attackDistance) {
                 state = 2;
-            } else if (Math.abs(player.getHitBoxY() - (x + xOffSet)) < moveDistance) {
-
+            } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < moveDistance) {
                 state = 1;
             } else {
                 state = 0;
@@ -49,7 +48,7 @@ public class EvWizzEnemy extends Enemy {
 
 
         }
-        enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);
+        enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
 //0-idle,1-move,2-attack,3-hurt,4-death
         switch (state) {
             case 0:
@@ -64,7 +63,7 @@ public class EvWizzEnemy extends Enemy {
 
                 break;
             case 3:
-                //what should it do if hurt? play funny sound idk
+
                 break;
             case 4:
                 alive = false;

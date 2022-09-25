@@ -25,7 +25,7 @@ public class UndeadExecutioner extends Enemy {
         speed = 1;
         state = 0;
         summonDistance = 800;
-        enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);//TODO: need this?
+        enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
     }
 
     public Texture[][] populateSpecificAnimationTextures() {
@@ -48,11 +48,11 @@ public class UndeadExecutioner extends Enemy {
             state = 4;
         } else if (health != originalHealth) {
             state = 5;
-        } else if (Math.abs(player.getX() - (x + xOffSet)) < attackDistance) {
+        } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < attackDistance) {
             state = 2;
-        } else if (Math.abs(player.getX() - (x + xOffSet)) < summonDistance) {
+        } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < summonDistance) {
             state = 3;
-        } else if (Math.abs(player.getX() - (x + xOffSet)) < moveDistance) {
+        } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < moveDistance) {
             state = 1;
         } else {
             state = 0;
@@ -61,22 +61,22 @@ public class UndeadExecutioner extends Enemy {
 
         switch (state) {
             case 0:
-                enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);
+                enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
                 break;
             case 1:
-                enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);
+                enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
                 move(player);
                 break;
             case 2:
-                enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);
+                enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
                 attack(playerHealthbar, player);
                 break;
             case 3:
-                enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);
+                enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
                 if(undeadProjectiles==null){undeadProjectiles = summon();}
                 break;
             case 4:
-                enemyAnimation = new Animation<Texture>(0.2f, animationTextures[state]);
+                enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
                 alive = false;
                 break;
 
