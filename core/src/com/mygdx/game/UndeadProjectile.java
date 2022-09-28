@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 public class UndeadProjectile extends EnemyProjectile {
 
     private static boolean creationAnimationFinished;
-    private Animation<Texture> animation;
+    private static Animation<Texture> animation;
     private static Texture[][] animationTextures;
 
     public UndeadProjectile(boolean flipped, int undeadX, int undeadY, int summonNumber) {
@@ -24,9 +24,8 @@ public class UndeadProjectile extends EnemyProjectile {
         speedX = 2;
         if (animationTextures == null) {
             animationTextures = populate();
-
+            animation = new Animation<>(0.2f, animationTextures[1]);
         }
-        animation = new Animation<>(0.2f, animationTextures[1]);
 
         switch (summonNumber) {
             case 1:
@@ -47,7 +46,7 @@ public class UndeadProjectile extends EnemyProjectile {
 
     }
 
-    public Animation<Texture> getAnimation() {
+    public static Animation<Texture> getAnimation() {
         return animation;
     }
 
@@ -64,6 +63,7 @@ public class UndeadProjectile extends EnemyProjectile {
         }
         if (!creationAnimationFinished && animation.isAnimationFinished(timeElapsed)) {
             animation = new Animation<>(0.2f, animationTextures[0]);
+            animation.setPlayMode(Animation.PlayMode.LOOP);
             creationAnimationFinished = true;
         }
         move(player);
