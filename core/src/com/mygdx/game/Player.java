@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 public class Player {
 
     private final AP9 ap9;
-    private int score;
     private boolean isJumping;
     private int x;
     private int y;
@@ -22,6 +22,9 @@ public class Player {
     private boolean isMoving;
     private boolean flipped;
     private int xOffSet;
+    private boolean alive;
+    private int score;
+
     public Player() {
         ap9 = new AP9();
         x = 20;
@@ -34,19 +37,11 @@ public class Player {
         lastHealth = 10;
         state = 0;
         flipped = false;
+        alive = true;
+        score=0;
     }
 
-    public int getScore() {
-        return score;
-    }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public AP9 getAp9() {
-        return ap9;
-    }
 
     public void populateTextures() {
         animationTextures = new Texture[][]{new Texture[6], new Texture[12], new Texture[14], new Texture[8], new Texture[6]};
@@ -93,11 +88,11 @@ public class Player {
             ap9.shoot();
         }
         ap9.updateSprite(timeElapsed, getX(), getY(), flipped);
-        animate(healthbar);
+        animate(healthbar,timeElapsed);
         alignHitBoxes();
     }
 
-    public void animate(PlayerHealthbar healthbar) {
+    public void animate(PlayerHealthbar healthbar,float timeElapsed) {
         if (healthbar.getHealth() <= 0) {
             state = 4;
         } else if (healthbar.getHealth() != lastHealth) {
@@ -112,7 +107,13 @@ public class Player {
         }
 
         animation = new Animation(0.1f, animationTextures[state]);
+        if (state==4&&animation.isAnimationFinished(timeElapsed)){
+            alive=false;
+        }
 
+    }
+    public AP9 getAp9() {
+        return ap9;
     }
 
     public int getX() {
@@ -175,6 +176,23 @@ public class Player {
         HitBoxX = x + xOffSet;
         HitBoxY = y;
     }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 }
 
 

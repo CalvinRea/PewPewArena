@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class LevelScreen extends ScreenAdapter {
+    final int maxScore=2;
     MusicManager musicManager;
     MyGdxGame game;
     Player player;
@@ -19,7 +20,6 @@ public class LevelScreen extends ScreenAdapter {
     Torch torch;
     UndeadExecutioner undeadExecutioner;
     EvWizzEnemy evWizzEnemy;
-
     float timeElapsed = 0;
 
     public LevelScreen(MyGdxGame game, Player player) {
@@ -64,7 +64,6 @@ public class LevelScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         musicManager.dispose();
-        background.dispose();
         batch.dispose();
     }//call to dispose
 
@@ -127,10 +126,13 @@ public class LevelScreen extends ScreenAdapter {
             }
         }
 
-        Texture texture = (Texture) player.getAnimation().getKeyFrame(timeElapsed, true);
-        batch.draw(texture, player.getX(), player.getY() - 50, 280, 280, 0, 0, 128, 98, player.isFlipped(), false);
+        Texture playerTexture = (Texture) player.getAnimation().getKeyFrame(timeElapsed, true);
+        batch.draw(playerTexture, player.getX(), player.getY() - 50, 280, 280, 0, 0, 128, 98, player.isFlipped(), false);
+        if(!player.isAlive()&&player.getAnimation().isAnimationFinished(timeElapsed)){
+           game.setScreen(new GameOverScreen(game));
+        }
 
-        player.getAp9().sprite.draw(batch);//280 width 280 height
+        player.getAp9().sprite.draw(batch);
         if (player.getAp9().bullets != null) {
             for (int i = 0; i < player.getAp9().bullets.size(); i++) {
                 batch.draw(player.getAp9().bullets.get(i).animation.getKeyFrame(timeElapsed), player.getAp9().bullets.get(i).x, player.getAp9().bullets.get(i).y, 30, 30);
@@ -143,6 +145,9 @@ public class LevelScreen extends ScreenAdapter {
     public void damageEnemies() {
         undeadExecutioner.checkBulletAndPain(player.getAp9().bullets, undeadExecutioner.x, undeadExecutioner.y, player.getAp9().damage);
         evWizzEnemy.checkBulletAndPain(player.getAp9().bullets, evWizzEnemy.x, evWizzEnemy.y, player.getAp9().damage);
+        if(player.getScore()==maxScore){
+            game.setScreen(new WinScreen(game));
+        }
     }
 
     public void setLocations() {
@@ -150,7 +155,7 @@ public class LevelScreen extends ScreenAdapter {
         player.setY(60);
         originalY = player.getY();
         evWizzEnemy.y = -110;
-        evWizzEnemy.x = 9000;
+        evWizzEnemy.x = 900;
         undeadExecutioner.x = 500;
         undeadExecutioner.y = -250;
     }

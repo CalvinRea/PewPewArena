@@ -80,6 +80,7 @@ public class UndeadExecutioner extends Enemy {
             case 4:
                 enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
                 alive = false;
+                player.setScore(player.getScore()+1);
                 break;
 
         }

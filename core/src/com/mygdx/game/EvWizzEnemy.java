@@ -67,6 +67,7 @@ public class EvWizzEnemy extends Enemy {
                 break;
             case 4:
                 alive = false;
+                player.setScore(player.getScore()+1);
                 break;
 
         }

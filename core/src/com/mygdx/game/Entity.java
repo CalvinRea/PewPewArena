@@ -8,7 +8,6 @@ public class Entity {
     protected int y;
     protected int xOffSet;
     protected int yOffSet;
-
     protected int speed;
     protected double health;
     protected double originalHealth;
