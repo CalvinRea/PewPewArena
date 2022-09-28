@@ -22,13 +22,18 @@ public class MusicManager {
     public void playMusic() {
         if (i == musicList.size())
             i = 0;
-        if (i == 0 || !musicList.get(i - 1).isPlaying())
+        if (musicList.size()!=0&&(i == 0 || !musicList.get(i - 1).isPlaying()))
             musicList.get(i).play();
     }
 
     public void dispose() {
-        for (Music m : musicList) {
-            m.dispose();
+ int k = musicList.size();
+        while(k>0) {
+            musicList.get(0).stop();
+            musicList.get(0).dispose();
+            musicList.remove(0);
+            k--;
         }
+
     }
 }
