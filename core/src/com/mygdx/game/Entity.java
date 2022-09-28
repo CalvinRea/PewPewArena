@@ -44,4 +44,5 @@ public class Entity {
         y -= speed;
     }
 
+    public boolean isAlive(){return alive;}
 }

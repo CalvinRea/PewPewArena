@@ -54,7 +54,7 @@ public class MainMenu extends ScreenAdapter {
         batch.begin();
         batch.draw(toDraw, 0, 0);
         batch.end();
-        stage.act(timeElapsed);//math.min(Gdx.graphics.getDeltaTime(), 1 / 30f)
+        stage.act(timeElapsed);
         stage.draw();
     }
 

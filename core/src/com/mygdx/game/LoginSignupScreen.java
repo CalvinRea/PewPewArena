@@ -23,7 +23,7 @@ import java.sql.Date;
 import java.util.Scanner;
 
 public class LoginSignupScreen extends ScreenAdapter {
-    //TODO: get rid of useless global variables
+
     int age;
     MyGdxGame game;
     Stage logStage;
@@ -141,12 +141,14 @@ public class LoginSignupScreen extends ScreenAdapter {
                 usernameEntry = textField.getText();
             }
         };
+
         TextField.TextFieldListener passwordListener = new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField textField, char c) {
                 passwordEntry = textField.getText();
             }
         };
+
         TextField.TextFieldListener yearListener = new TextField.TextFieldListener() {
             @Override
             public void keyTyped(TextField textField, char c) {
@@ -157,7 +159,6 @@ public class LoginSignupScreen extends ScreenAdapter {
                 }
             }
         };
-
 
         TextField.TextFieldListener dayListener = new TextField.TextFieldListener() {
             @Override
@@ -175,6 +176,8 @@ public class LoginSignupScreen extends ScreenAdapter {
             }
         };
 
+
+
         usernameEntry = usernameEntry.trim();
         passwordEntry = passwordEntry.trim();
 
@@ -186,8 +189,7 @@ public class LoginSignupScreen extends ScreenAdapter {
             @Override
             public boolean handle(Event event) {
                 age = (int) sldAge.getValue();
-                return true;
-            }
+                return true;}
         });
 
         final CheckBox chkRobot = new CheckBox("I am not a robot", robotStyle);
@@ -224,21 +226,23 @@ public class LoginSignupScreen extends ScreenAdapter {
                 if (!usernameEntry.equals("")|| !passwordEntry.equals("")) {
                     if (count < 5) {
                         age = (int) sldAge.getValue();
-                        if (checkAge()) {//add later validation for if you are a robot
+                        if (checkAge()) {
+                            if(chkRobot.isChecked()){
                             Label.LabelStyle greenStyle = new Label.LabelStyle(bitFont, Color.GREEN);
                             lblErr.setStyle(greenStyle);
                             error = "Success!";
-                            createNewUserPass();
+                            createNewUserPass();}else{
+                                error="Error,no robots allowed";
+                            }
                         } else {
                             error = "Error,too young/incorrect age";
                         }
                     } else {
-                        error = "Error, can have a maximum of 5 accounts";
+                        error = "Error, can have a maximum 5 accounts";
                     }
                 } else {
-                    error = "Error, an empty space is not a username/password";
+                    error = "Error,username/password left blank";
                 }
-
             }
         });
 
@@ -251,7 +255,7 @@ public class LoginSignupScreen extends ScreenAdapter {
                     if (exists) {
                         game.setScreen(new MainMenu(game));
                     }
-                }
+                }else{error="Please register";}
 
             }
         });
@@ -328,7 +332,7 @@ public class LoginSignupScreen extends ScreenAdapter {
             }
             scan.close();
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            error="UsernamesPasswords.txt not found, please restore";
         }
 
 
@@ -351,7 +355,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         int index = searchUser();
         boolean bool = false;
         if (index == -1) {
-            error = "Username does not exist";
+            error = "Username does not exist, please register";
         } else {
             if (passwords[index].equals(passwordEntry)) {
                 bool = true;
@@ -506,7 +510,6 @@ public class LoginSignupScreen extends ScreenAdapter {
         }
         return bool;
     }
-
 
     public void updateLabels() {
         lblErr.setText(error);

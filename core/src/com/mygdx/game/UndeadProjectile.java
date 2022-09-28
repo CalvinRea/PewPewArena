@@ -3,9 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
-
 public class UndeadProjectile extends EnemyProjectile {
-    boolean creationAnimationFinished;
+
+    private static boolean creationAnimationFinished;
+    private static Animation<Texture> animation;
+    private static Texture[][] animationTextures;
+
     public UndeadProjectile(boolean flipped,int undeadX, int undeadY, int summonNumber) {
 
         creationAnimationFinished=false;
@@ -17,11 +20,10 @@ public class UndeadProjectile extends EnemyProjectile {
         damageRangeY= 80;
         xOffSet = 50;
         yOffSet = 50;
-        animationTextures = populate();
         speedY = 1;
         speedX = 2;
-        animation = new Animation<>(0.2f, animationTextures[1]);
-
+        if(animationTextures==null){animationTextures = populate();
+            animation = new Animation<>(0.2f, animationTextures[1]);}
 
             switch (summonNumber) {
                 case 1:
@@ -61,6 +63,8 @@ public class UndeadProjectile extends EnemyProjectile {
 
     }
 
-
+    public static Animation<Texture> getAnimation() {
+        return animation;
+    }
 }
 

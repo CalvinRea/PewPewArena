@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UndeadExecutioner extends Enemy {
     int summonDistance;
-    UndeadProjectile[] undeadProjectiles;
+    ArrayList<UndeadProjectile> undeadProjectiles;
 
     public UndeadExecutioner() {
         hitBoxX=125;
@@ -43,7 +43,7 @@ public class UndeadExecutioner extends Enemy {
             hitBoxXOffSet=100;
             hitBoxYOffSet=425;
         }
-        //TODO: ask if this is best practice
+
         if (health <= 0) {
             state = 4;
         } else if (health != originalHealth) {
@@ -82,55 +82,22 @@ public class UndeadExecutioner extends Enemy {
 
         }
         int i = 0;
-        while (undeadProjectiles != null && i < undeadProjectiles.length) {
-            undeadProjectiles[i].ai(player, playerHealthbar,timeElapsed);
+        while (undeadProjectiles != null && i < undeadProjectiles.size()) {
+            if(undeadProjectiles.get(i).isAlive()){
+            undeadProjectiles.get(i).ai(player, playerHealthbar,timeElapsed);
+            }else{
+                undeadProjectiles.remove(i);
+            }
             i++;
         }
 
     }
 
-    public UndeadProjectile[] summon() {
-        UndeadProjectile[] temp = new UndeadProjectile[3];
-        for (int i = 0; i < temp.length; i++) {
-            temp[i] = new UndeadProjectile( flipped,x+xOffSet, y+yOffSet, i + 1);
+    public ArrayList<UndeadProjectile> summon() {
+        ArrayList<UndeadProjectile> temp=new ArrayList<>(3);
+        for (int i = 0; i < 3; i++) {
+            temp.add(new UndeadProjectile( flipped,x+xOffSet, y+yOffSet, i + 1)) ;
         }
         return temp;
     }
-
-    public Texture[] populateUndeadProjectileTextures(float timeElapsed) {
-
-        Texture[] projTextures = null;
-        if (undeadProjectiles != null) {
-            projTextures = new Texture[undeadProjectiles.length];
-            for (int j = 0; j < undeadProjectiles.length; j++) {
-                projTextures[j] = undeadProjectiles[j].animation.getKeyFrame(timeElapsed, true);}
-
-
-            }
-
-
-        return projTextures;
-    }
-
-    public UndeadProjectile[] deleteDeadProjectiles() {
-
-        List<UndeadProjectile> currentAliveList = new ArrayList<>();
-        UndeadProjectile[] temp;
- int i = 0;
-        while (undeadProjectiles != null && i < undeadProjectiles.length) {
-            if (undeadProjectiles[i].alive) {
-               currentAliveList.add(undeadProjectiles[i]);
-            }
-            i++;
-        }
-if(currentAliveList.size()==0){
-    temp=null;
-}else{
-   temp=currentAliveList.toArray(new UndeadProjectile[currentAliveList.size()]);
-}
-return temp;
-
-
-    }
-
 }

@@ -22,5 +22,9 @@ public class Gun {
         return temp;
     }
 
+    public void shoot(){
+
+        shooting=true;
+    }
 
 }

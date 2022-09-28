@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Healthbar {
-    //TODO: make health bar super class that player and boss healthbar inherit from
+
     protected Texture[] textures;
     protected Texture currentTexture;
     protected double originalHealth;

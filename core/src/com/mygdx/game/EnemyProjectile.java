@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
 public class EnemyProjectile extends Projectile {
-//TODO: redo projectile damage system to include widths and heights as well as x and y values
-    protected Texture[][] animationTextures;
+
     protected boolean tracking;
 
     protected void move(Player player) {

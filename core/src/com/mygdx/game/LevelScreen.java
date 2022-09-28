@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class LevelScreen extends ScreenAdapter {
@@ -34,10 +32,10 @@ public class LevelScreen extends ScreenAdapter {
     public void show() {
 
         setupMusic();
-        undeadExecutioner=new UndeadExecutioner();
-        evWizzEnemy=new EvWizzEnemy();
+        undeadExecutioner = new UndeadExecutioner();
+        evWizzEnemy = new EvWizzEnemy();
         torch = new Torch();
-        bossHealthbar=new BossHealthbar(undeadExecutioner.originalHealth);
+        bossHealthbar = new BossHealthbar(undeadExecutioner.originalHealth);
         playerHealthbar = new PlayerHealthbar();
         batch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("Temp assets folder/Backgrounds/Background" + 1 + ".png"));
@@ -50,10 +48,9 @@ public class LevelScreen extends ScreenAdapter {
     @Override
     public void render(float Delta) {
 
-        player.controls(originalY,timeElapsed,playerHealthbar);
-        deleteDeadParticles();
+        player.controls(originalY, timeElapsed, playerHealthbar);
         graphics();
-        enemyDamage();//TODO: if not alive don't draw
+        damageEnemies();
         aiThink();
         musicManager.playMusic();
     }
@@ -82,25 +79,20 @@ public class LevelScreen extends ScreenAdapter {
 
     }
 
-    public void deleteDeadParticles() {
-        if (undeadExecutioner.alive) {
-            undeadExecutioner.undeadProjectiles=undeadExecutioner.deleteDeadProjectiles();
-        }
-    }
 
     public void aiThink() {
         if (evWizzEnemy.alive) {
             evWizzEnemy.ai(player, playerHealthbar, originalY);
         }
         if (undeadExecutioner.alive) {
-            undeadExecutioner.ai(player, playerHealthbar,timeElapsed);
+            undeadExecutioner.ai(player, playerHealthbar, timeElapsed);
         }
 
     }
 
     public void graphics() {
         playerHealthbar.setCurrentTexture(playerHealthbar.getHealth());
-        bossHealthbar.setCurrentTexture(undeadExecutioner.health);//TODO: find the difference between health and original health
+        bossHealthbar.setCurrentTexture(undeadExecutioner.health);
 
         flipper();
 
@@ -116,8 +108,8 @@ public class LevelScreen extends ScreenAdapter {
         batch.draw(torchTexture, 1557, 230, 70, 100);
         batch.draw(playerHealthbar.getCurrentTexture(), playerHealthbar.getX(), playerHealthbar.getY(), 500, 80);
 
-        if(bossHealthbar.bossAlive)
-        batch.draw(bossHealthbar.getCurrentTexture(),bossHealthbar.getX(),bossHealthbar.getY(),600,200);
+        if (bossHealthbar.bossAlive)
+            batch.draw(bossHealthbar.getCurrentTexture(), bossHealthbar.getX(), bossHealthbar.getY(), 600, 200);
 
         if (evWizzEnemy.alive) {
             Texture evWizzEnemyTexture = evWizzEnemy.enemyAnimation.getKeyFrame(timeElapsed, true);
@@ -127,30 +119,28 @@ public class LevelScreen extends ScreenAdapter {
         if (undeadExecutioner.alive) {
             Texture undeadExecutionerTexture = undeadExecutioner.enemyAnimation.getKeyFrame(timeElapsed, true);
             batch.draw(undeadExecutionerTexture, undeadExecutioner.x, undeadExecutioner.y, 700, 700, 0, 0, 150, 150, undeadExecutioner.isFlipped(), false);
+            if (undeadExecutioner.undeadProjectiles != null) {
+                for (int i = 0; i < undeadExecutioner.undeadProjectiles.size(); i++) {
+                    batch.draw(UndeadProjectile.getAnimation().getKeyFrame(timeElapsed),
+                            undeadExecutioner.undeadProjectiles.get(i).x, undeadExecutioner.undeadProjectiles.get(i).y, 150, 150);
+                }
+            }
         }
 
-        Texture[] undeadProjectilesTextures = undeadExecutioner.populateUndeadProjectileTextures(timeElapsed);
-
-       if(undeadProjectilesTextures!=null){
-           for (int i = 0; i < undeadExecutioner.undeadProjectiles.length; i++) {
-               batch.draw(undeadProjectilesTextures[i],
-                       undeadExecutioner.undeadProjectiles[i].x, undeadExecutioner.undeadProjectiles[i].y, 150, 150);
-                 }
-       }
         Texture texture = (Texture) player.getAnimation().getKeyFrame(timeElapsed, true);
-        batch.draw(texture, player.getX(), player.getY()-50, 280, 280,0,0,128,98,player.isFlipped(),false);
+        batch.draw(texture, player.getX(), player.getY() - 50, 280, 280, 0, 0, 128, 98, player.isFlipped(), false);
+
         player.getAp9().sprite.draw(batch);//280 width 280 height
-        if(player.getAp9().bullets!=null){
-            for (int i = 0; i <player.getAp9().bullets.size() ; i++) {
-                if(player.getAp9().bullets.get(i).alive)
-                batch.draw(player.getAp9().bullets.get(i).animation.getKeyFrame(timeElapsed),player.getAp9().bullets.get(i).x,player.getAp9().bullets.get(i).y,30,30);
+        if (player.getAp9().bullets != null) {
+            for (int i = 0; i < player.getAp9().bullets.size(); i++) {
+                batch.draw(player.getAp9().bullets.get(i).animation.getKeyFrame(timeElapsed), player.getAp9().bullets.get(i).x, player.getAp9().bullets.get(i).y, 30, 30);
             }
         }
 
         batch.end();
     }
 
-    public void enemyDamage(){
+    public void damageEnemies() {
         undeadExecutioner.checkBulletAndPain(player.getAp9().bullets, undeadExecutioner.x, undeadExecutioner.y, player.getAp9().damage);
         evWizzEnemy.checkBulletAndPain(player.getAp9().bullets, evWizzEnemy.x, evWizzEnemy.y, player.getAp9().damage);
     }
@@ -160,16 +150,14 @@ public class LevelScreen extends ScreenAdapter {
         player.setY(60);
         originalY = player.getY();
         evWizzEnemy.y = -110;
-        evWizzEnemy.x = 900;
+        evWizzEnemy.x = 9000;
         undeadExecutioner.x = 500;
         undeadExecutioner.y = -250;
     }
 
-    public void setupMusic(){
-    musicManager = new MusicManager();
-    musicManager.playMusic();
+    public void setupMusic() {
+        musicManager = new MusicManager();
+        musicManager.playMusic();
     }
-
-
 
 }

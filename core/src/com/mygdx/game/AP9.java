@@ -13,7 +13,7 @@ import static com.badlogic.gdx.math.MathUtils.radDeg;
 
 public class AP9 extends Gun {
 
-    ArrayList<AP9Bullet> bullets = new ArrayList<AP9Bullet>();
+    ArrayList<AP9Bullet> bullets = new ArrayList<>();
 
     public AP9(){
         damage =1;
@@ -36,10 +36,7 @@ public class AP9 extends Gun {
        return populateAnimationTextures(temp,"Temp assets folder/Sprites/Gun pack 4/Animations/AP-9");
     }
 
-public void shoot(){
 
-        shooting=true;
-}
 
     public void updateSprite(float timeElapsed, int playerX, int playerY,boolean flipped){
 
@@ -53,7 +50,7 @@ public void shoot(){
             }
         }else{
         sprite.setTexture(gunTexture);}
-        if(flipped==false){
+        if(!flipped){
         sprite.setPosition(playerX+40,playerY+50);
         }else{
             sprite.setPosition(playerX+110,playerY+50);
@@ -80,7 +77,8 @@ bullets.get(bullets.size()-1).initialisePositioning(sprite,playerX, playerY);
 
 public void updateBullets(){
     for (int i = 0; i < bullets.size(); i++) {
-       bullets.get(i).move();
+        if(bullets.get(i).isAlive()){
+       bullets.get(i).move();}else{bullets.remove(i);}
     }
 }
 

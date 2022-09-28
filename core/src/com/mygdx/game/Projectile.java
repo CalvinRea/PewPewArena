@@ -8,7 +8,6 @@ public class Projectile extends Entity{
     protected int damageRangeY;
     protected double speedX;
     protected double speedY;
-    protected Animation<Texture> animation;
     protected double damage;
 
 }
