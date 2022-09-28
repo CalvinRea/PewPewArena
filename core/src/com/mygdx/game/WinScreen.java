@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 public class WinScreen extends ScreenAdapter {
 
@@ -46,7 +47,7 @@ public class WinScreen extends ScreenAdapter {
         timeElapsed += Gdx.graphics.getDeltaTime();
         Texture toDraw = winScreen.getKeyFrame(timeElapsed, true);
         batch.begin();
-        batch.draw(toDraw, 0, 0);
+        batch.draw(toDraw, 0, 0,1920,1080);
         batch.end();
         stage.act(timeElapsed);
         stage.draw();

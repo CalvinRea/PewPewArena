@@ -128,10 +128,6 @@ public class LevelScreen extends ScreenAdapter {
 
         Texture playerTexture = (Texture) player.getAnimation().getKeyFrame(timeElapsed, true);
         batch.draw(playerTexture, player.getX(), player.getY() - 50, 280, 280, 0, 0, 128, 98, player.isFlipped(), false);
-        if(!player.isAlive()&&player.getAnimation().isAnimationFinished(timeElapsed)){
-           game.setScreen(new GameOverScreen(game));
-        }
-
         player.getAp9().sprite.draw(batch);
         if (player.getAp9().bullets != null) {
             for (int i = 0; i < player.getAp9().bullets.size(); i++) {
@@ -140,6 +136,10 @@ public class LevelScreen extends ScreenAdapter {
         }
 
         batch.end();
+
+        if(!player.isAlive()&&player.getAnimation().isAnimationFinished(timeElapsed)){
+            game.setScreen(new GameOverScreen(game));
+        }
     }
 
     public void damageEnemies() {

@@ -46,7 +46,7 @@ public class GameOverScreen extends ScreenAdapter {
         timeElapsed += Gdx.graphics.getDeltaTime();
         Texture toDraw = gameOver.getKeyFrame(timeElapsed, true);
         batch.begin();
-        batch.draw(toDraw, 0, 0);
+        batch.draw(toDraw, 0, 0,1920,1080);
         batch.end();
         stage.act(timeElapsed);
         stage.draw();
@@ -83,7 +83,8 @@ public class GameOverScreen extends ScreenAdapter {
                 game.setScreen(new MainMenu(game));
             }
         });
-        table.add(btnBack).uniform(true).size(stage.getWidth() / 2, stage.getHeight() / 2);
+
+        table.add(btnBack).size(stage.getWidth() / 2, stage.getHeight() / 2).padTop(500);
         return table;
     }
 
