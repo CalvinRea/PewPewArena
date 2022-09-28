@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import java.util.ArrayList;
 
 public class UndeadExecutioner extends Enemy {
-    int summonDistance;
+    private static final int summonDistance=800;//TODO: make more variables static final if constant and the same across objects
+    private static final int summonNumber=3;
     ArrayList<UndeadProjectile> undeadProjectiles;
 
     public UndeadExecutioner() {
@@ -24,7 +25,6 @@ public class UndeadExecutioner extends Enemy {
         moveDistance = 1500;
         speed = 1;
         state = 0;
-        summonDistance = 800;
         enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
     }
 
@@ -73,7 +73,7 @@ public class UndeadExecutioner extends Enemy {
                 break;
             case 3:
                 enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
-                if (undeadProjectiles == null) {
+                if (undeadProjectiles == null || undeadProjectiles.size()==0) {
                     undeadProjectiles = summon();
                 }
                 break;
@@ -98,7 +98,7 @@ public class UndeadExecutioner extends Enemy {
 
     public ArrayList<UndeadProjectile> summon() {
         ArrayList<UndeadProjectile> temp = new ArrayList<>(3);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < summonNumber; i++) {
             temp.add(new UndeadProjectile(flipped, x + xOffSet, y + yOffSet, i + 1));
         }
         return temp;
