@@ -12,13 +12,15 @@ public class Healthbar {
     protected int y;
 
 
-    public Healthbar(){}
+    public Healthbar() {
+    }
 
     public void populate(String filePath) {
         for (int i = 0; i < this.textures.length; i++) {
             this.textures[i] = new Texture(Gdx.files.internal(filePath + i + ".png"));
         }
     }
+
     public double getHealth() {
         return originalHealth;
     }

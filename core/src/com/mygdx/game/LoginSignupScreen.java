@@ -177,7 +177,6 @@ public class LoginSignupScreen extends ScreenAdapter {
         };
 
 
-
         usernameEntry = usernameEntry.trim();
         passwordEntry = passwordEntry.trim();
 
@@ -189,7 +188,8 @@ public class LoginSignupScreen extends ScreenAdapter {
             @Override
             public boolean handle(Event event) {
                 age = (int) sldAge.getValue();
-                return true;}
+                return true;
+            }
         });
 
         final CheckBox chkRobot = new CheckBox("I am not a robot", robotStyle);
@@ -223,16 +223,17 @@ public class LoginSignupScreen extends ScreenAdapter {
         btnRegister.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (!usernameEntry.equals("")|| !passwordEntry.equals("")) {
+                if (!usernameEntry.equals("") || !passwordEntry.equals("")) {
                     if (count < 5) {
                         age = (int) sldAge.getValue();
                         if (checkAge()) {
-                            if(chkRobot.isChecked()){
-                            Label.LabelStyle greenStyle = new Label.LabelStyle(bitFont, Color.GREEN);
-                            lblErr.setStyle(greenStyle);
-                            error = "Success!";
-                            createNewUserPass();}else{
-                                error="Error,no robots allowed";
+                            if (chkRobot.isChecked()) {
+                                Label.LabelStyle greenStyle = new Label.LabelStyle(bitFont, Color.GREEN);
+                                lblErr.setStyle(greenStyle);
+                                error = "Success!";
+                                createNewUserPass();
+                            } else {
+                                error = "Error,no robots allowed";
                             }
                         } else {
                             error = "Error,too young/incorrect age";
@@ -255,7 +256,9 @@ public class LoginSignupScreen extends ScreenAdapter {
                     if (exists) {
                         game.setScreen(new MainMenu(game));
                     }
-                }else{error="Please register";}
+                } else {
+                    error = "Please register";
+                }
 
             }
         });
@@ -332,7 +335,7 @@ public class LoginSignupScreen extends ScreenAdapter {
             }
             scan.close();
         } catch (FileNotFoundException ex) {
-            error="UsernamesPasswords.txt not found, please restore";
+            error = "UsernamesPasswords.txt not found, please restore";
         }
 
 

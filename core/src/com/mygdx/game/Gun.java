@@ -17,14 +17,14 @@ public class Gun {
     protected Texture[] populateAnimationTextures(Texture[] temp, String filePath) {
         for (int i = 0; i < temp.length; i++) {
 
-                temp[i] = new Texture(Gdx.files.internal(filePath +"/frame (" + (i + 1) + ").gif"));
+            temp[i] = new Texture(Gdx.files.internal(filePath + "/frame (" + (i + 1) + ").gif"));
         }
         return temp;
     }
 
-    public void shoot(){
+    public void shoot() {
 
-        shooting=true;
+        shooting = true;
     }
 
 }

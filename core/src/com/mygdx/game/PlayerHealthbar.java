@@ -3,12 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public class PlayerHealthbar extends Healthbar{
+public class PlayerHealthbar extends Healthbar {
 
 
     public PlayerHealthbar() {
 
-        originalHealth= 10;
+        originalHealth = 10;
         textures = new Texture[11];
         populate("Temp assets folder/Sprites/MyHealthbar/");
         currentTexture = getTextures()[10];

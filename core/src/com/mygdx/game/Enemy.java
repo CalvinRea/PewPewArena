@@ -59,29 +59,29 @@ public class Enemy extends Entity {
         setFlipped(0 > playerX - (x + xOffSet));
     }
 
-    public void checkBulletAndPain(ArrayList<AP9Bullet> bullets,int enX,int enY,double damageDone){
+    public void checkBulletAndPain(ArrayList<AP9Bullet> bullets, int enX, int enY, double damageDone) {
         for (int i = 0; i < bullets.size(); i++) {
 
-            if (Math.abs(enX+hitBoxXOffSet - bullets.get(i).x ) < hitBoxX
-                    && Math.abs(enY+hitBoxYOffSet - bullets.get(i).y ) < hitBoxY
+            if (Math.abs(enX + hitBoxXOffSet - bullets.get(i).x) < hitBoxX
+                    && Math.abs(enY + hitBoxYOffSet - bullets.get(i).y) < hitBoxY
             ) {
-                health-=damageDone;
+                health -= damageDone;
                 bullets.remove(i);
             }
         }
-        if(!alive){
+        if (!alive) {
             dispose();
         }
     }
 
-    public void dispose(){
+    public void dispose() {
         for (Texture[] animationTexture : animationTextures) {
             for (Texture texture : animationTexture) {
                 texture.dispose();
             }
         }
-        x=10000;
-        y=10000;
+        x = 10000;
+        y = 10000;
     }
 
 

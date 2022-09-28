@@ -6,10 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 public class EvWizzEnemy extends Enemy {
 
     public EvWizzEnemy() {
-        hitBoxX=60;
-        hitBoxY=80;
-        hitBoxXOffSet=250;//these values are right
-        hitBoxYOffSet=225;
+        hitBoxX = 60;
+        hitBoxY = 80;
+        hitBoxXOffSet = 250;//these values are right
+        hitBoxYOffSet = 225;
         originalHealth = 10;
         health = 10;
         damage = 0.05;
@@ -32,7 +32,7 @@ public class EvWizzEnemy extends Enemy {
 
     public void ai(Player player, PlayerHealthbar healthBar, int originalY) {
 
-       if (health <= 0) {
+        if (health <= 0) {
             state = 4;
         } else {
             if (health != originalHealth) {

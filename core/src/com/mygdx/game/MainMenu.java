@@ -30,6 +30,9 @@ public class MainMenu extends ScreenAdapter {
         this.game = game;
     }
 
+    public static void controls() {
+    }
+
     @Override
     public void show() {
 
@@ -96,14 +99,14 @@ public class MainMenu extends ScreenAdapter {
         TextButton btnControls = new TextButton("Controls", buttonStyle);
         TextButton btnExit = new TextButton("Exit", buttonStyle);
 
-    
+
         btnPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new LevelScreen(game,new Player()));
+                game.setScreen(new LevelScreen(game, new Player()));
             }
         });
-       
+
         btnControls.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -124,6 +127,4 @@ public class MainMenu extends ScreenAdapter {
         table.add(btnExit).uniform(true).fill();
         return table;
     }
-
-    public static void controls(){}
 }

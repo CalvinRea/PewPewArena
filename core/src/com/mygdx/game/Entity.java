@@ -16,15 +16,15 @@ public class Entity {
     public Entity() {
     }
 
-    protected void setPosition(int newX, int newY){
-        x=newX;
-        y=newY;
+    protected void setPosition(int newX, int newY) {
+        x = newX;
+        y = newY;
     }
 
-    protected void translate(double translationX, double translationY){
+    protected void translate(double translationX, double translationY) {
 
-        x+=translationX;
-        y+=translationY;
+        x += translationX;
+        y += translationY;
 
     }
 
@@ -44,5 +44,7 @@ public class Entity {
         y -= speed;
     }
 
-    public boolean isAlive(){return alive;}
+    public boolean isAlive() {
+        return alive;
+    }
 }

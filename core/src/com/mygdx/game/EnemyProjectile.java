@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 
 public class EnemyProjectile extends Projectile {
 
@@ -18,7 +17,7 @@ public class EnemyProjectile extends Projectile {
 
             if (player.getHitBoxY() - (y - yOffSet) > 0) {
                 moveUp(speedY);
-            } else if(player.getHitBoxY()+70 - (y - yOffSet) < 0){//+80 for player height
+            } else if (player.getHitBoxY() + 70 - (y - yOffSet) < 0) {//+80 for player height
                 moveDown(speedY);
             }
         }
@@ -38,6 +37,6 @@ public class EnemyProjectile extends Projectile {
         }
         return temp;
     }
-    }
+}
 
 
