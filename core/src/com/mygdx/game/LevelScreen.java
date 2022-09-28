@@ -121,7 +121,7 @@ public class LevelScreen extends ScreenAdapter {
             batch.draw(undeadExecutionerTexture, undeadExecutioner.x, undeadExecutioner.y, 700, 700, 0, 0, 150, 150, undeadExecutioner.isFlipped(), false);
             if (undeadExecutioner.undeadProjectiles != null) {
                 for (int i = 0; i < undeadExecutioner.undeadProjectiles.size(); i++) {
-                    batch.draw(UndeadProjectile.getAnimation().getKeyFrame(timeElapsed),
+                    batch.draw(undeadExecutioner.undeadProjectiles.get(i).getAnimation().getKeyFrame(timeElapsed),
                             undeadExecutioner.undeadProjectiles.get(i).x, undeadExecutioner.undeadProjectiles.get(i).y, 150, 150);
                 }
             }

@@ -88,6 +88,7 @@ public class UndeadExecutioner extends Enemy {
             if (undeadProjectiles.get(i).isAlive()) {
                 undeadProjectiles.get(i).ai(player, playerHealthbar, timeElapsed);
             } else {
+
                 undeadProjectiles.remove(i);
             }
             i++;
