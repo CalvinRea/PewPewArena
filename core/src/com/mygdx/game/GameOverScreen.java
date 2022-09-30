@@ -46,7 +46,7 @@ public class GameOverScreen extends ScreenAdapter {
         timeElapsed += Gdx.graphics.getDeltaTime();
         Texture toDraw = gameOver.getKeyFrame(timeElapsed, true);
         batch.begin();
-        batch.draw(toDraw, 0, 0,1920,1080);
+        batch.draw(toDraw, 0, 0, 1920, 1080);
         batch.end();
         stage.act(timeElapsed);
         stage.draw();

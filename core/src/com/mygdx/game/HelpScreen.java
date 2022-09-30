@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class HelpScreen extends ScreenAdapter{
+public class HelpScreen extends ScreenAdapter {
     SpriteBatch batch;
     MyGdxGame game;
     Stage stage;
@@ -21,8 +20,8 @@ public class HelpScreen extends ScreenAdapter{
     Texture background;
     float timeElapsed;
 
-    public HelpScreen(MyGdxGame game){
-        this.game=game;
+    public HelpScreen(MyGdxGame game) {
+        this.game = game;
     }
 
     @Override
@@ -73,7 +72,7 @@ public class HelpScreen extends ScreenAdapter{
     @Override
     public void render(float delta) {
         batch.begin();
-        batch.draw(background, 0, 0,1920,1080);
+        batch.draw(background, 0, 0, 1920, 1080);
         batch.end();
         stage.draw();
         timeElapsed += Gdx.graphics.getDeltaTime();
