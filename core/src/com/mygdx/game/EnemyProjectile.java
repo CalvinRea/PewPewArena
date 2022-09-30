@@ -23,8 +23,8 @@ public class EnemyProjectile extends Projectile {
         }
     }
 
-    protected void attack(PlayerHealthbar playerHealthbar, Player player) {
-        playerHealthbar.setHealth(playerHealthbar.getHealth() - damage);
+    protected void attack(Healthbar playerHealthbar, Player player) {
+        playerHealthbar.setCurrentHealth(playerHealthbar.getCurrentHealth() - damage);
         alive = false;
     }
 

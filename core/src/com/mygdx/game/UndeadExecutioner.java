@@ -34,8 +34,8 @@ public class UndeadExecutioner extends Enemy {
         return populateAnimationTextures(temp, "Temp assets folder/Sprites/Undead executioner/");
     }
 
-    public void ai(Player player, PlayerHealthbar playerHealthbar, float timeElapsed) {
-        //States 5-hurt (no animation bossbar), 4-death , 3-summon , 2-attack , 1-move , 0-idle
+    public void ai(Player player, Healthbar playerHealthbar, float timeElapsed) {
+        //States 4-death , 3-summon , 2-attack , 1-move , 0-idle
         if (isFlipped()) {
             hitBoxXOffSet = 550;
             hitBoxYOffSet = 425;
@@ -46,8 +46,6 @@ public class UndeadExecutioner extends Enemy {
 
         if (health <= 0) {
             state = 4;
-        } else if (health != originalHealth) {
-            state = 5;
         } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < attackDistance) {
             state = 2;
         } else if (Math.abs(player.getHitBoxX() - (x + xOffSet)) < summonDistance) {
@@ -69,7 +67,7 @@ public class UndeadExecutioner extends Enemy {
                 break;
             case 2:
                 enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
-                attack(playerHealthbar, player);
+                attack(playerHealthbar);
                 break;
             case 3:
                 enemyAnimation = new Animation<>(0.2f, animationTextures[state]);

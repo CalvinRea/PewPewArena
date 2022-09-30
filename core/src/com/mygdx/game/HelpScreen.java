@@ -51,7 +51,7 @@ public class HelpScreen extends ScreenAdapter {
         btnBack.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MainMenu(game));
+                game.setScreen(new MainMenuScreen(game));
             }
         });
         table.add(btnBack).uniform(true).size(stage.getWidth() / 2, stage.getHeight() / 2).padBottom(100);

@@ -5,28 +5,38 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Healthbar {
 
-    protected Texture[] textures;
-    protected Texture currentTexture;
-    protected double originalHealth;
-    protected int x;
-    protected int y;
+    private Texture[] textures;
+    private Texture currentTexture;
+    private final double originalHealth;
+    private double currentHealth;
+    private final int x;
+    private final int y;
 
 
-    public Healthbar() {
+    public Healthbar(int inX,int inY,double inOriginalHealth,int length,String filepathStart,String filepathEnd) {
+        x=inX;
+        y=inY;
+        originalHealth=inOriginalHealth;
+        textures=new Texture[length];
+        populate(filepathStart,filepathEnd);
+        currentTexture=textures[0];
+        currentHealth=originalHealth;
     }
 
-    public void populate(String filePath) {
-        for (int i = 0; i < this.textures.length; i++) {
-            this.textures[i] = new Texture(Gdx.files.internal(filePath + i + ".png"));
+    public void populate(String filePathStart,String filePathEnd) {
+        for (int i = 0; i < textures.length; i++) {
+            textures[i] = new Texture(Gdx.files.internal(filePathStart + (i+1) + filePathEnd));
         }
     }
 
-    public double getHealth() {
+    public double getOriginalHealth() {
         return originalHealth;
     }
 
-    public void setHealth(double originalHealth) {
-        this.originalHealth = originalHealth;
+    public double getCurrentHealth(){return currentHealth;}
+
+    public void setCurrentHealth(double inCurrentHealth){
+        currentHealth=inCurrentHealth;
     }
 
     public Texture[] getTextures() {
@@ -44,4 +54,17 @@ public class Healthbar {
     public Texture getCurrentTexture() {
         return currentTexture;
     }
+
+    protected void dispose() {
+        for (Texture t : textures) {
+            t.dispose();
+        }
+    }
+
+    public void setCurrentTexture(double i) {
+        if (i >= 0) {
+            currentTexture = textures[(int)((textures.length-1)-Math.ceil(i* (textures.length-1)/originalHealth))];
+        }
+    }
+
 }

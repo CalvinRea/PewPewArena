@@ -30,7 +30,7 @@ public class EvWizzEnemy extends Enemy {
         return populateAnimationTextures(temp, "Temp assets folder/Sprites/Evil Wizard/");
     }
 
-    public void ai(Player player, PlayerHealthbar healthBar, int originalY) {
+    public void ai(Player player, Healthbar healthBar, int originalY) {
 
         if (health <= 0) {
             state = 4;
@@ -58,7 +58,7 @@ public class EvWizzEnemy extends Enemy {
                 break;
             case 2:
                 if (player.getY() < originalY + 200) {
-                    attack(healthBar, player);
+                    attack(healthBar);
                 }
 
                 break;

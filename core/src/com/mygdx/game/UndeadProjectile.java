@@ -56,7 +56,7 @@ public class UndeadProjectile extends EnemyProjectile {
 
     }
 
-    public void ai(Player player, PlayerHealthbar playerHealthbar, float timeElapsed) {
+    public void ai(Player player, Healthbar playerHealthbar, float timeElapsed) {
 
         if (Math.abs(player.getHitBoxX() - (x - xOffSet)) < damageRangeX && Math.abs(player.getHitBoxY() - (y - yOffSet)) < damageRangeY) {
             attack(playerHealthbar, player);

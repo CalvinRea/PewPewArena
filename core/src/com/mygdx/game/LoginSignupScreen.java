@@ -254,7 +254,7 @@ public class LoginSignupScreen extends ScreenAdapter {
                 if (usernames[0] != null) {
                     boolean exists = searchUserAndPass();
                     if (exists) {
-                        game.setScreen(new MainMenu(game));
+                        game.setScreen(new MainMenuScreen(game));
                     }
                 } else {
                     error = "Please register";

@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class MainMenu extends ScreenAdapter {
+public class MainMenuScreen extends ScreenAdapter {
 
     static MyGdxGame game;
     Stage stage;
@@ -26,7 +26,7 @@ public class MainMenu extends ScreenAdapter {
     Animation<Texture> mainMenu;
     Music music;
 
-    public MainMenu(MyGdxGame game) {
+    public MainMenuScreen(MyGdxGame game) {
         this.game = game;
     }
 

@@ -32,8 +32,8 @@ public class Enemy extends Entity {
         }
     }
 
-    protected void attack(PlayerHealthbar healthBar, Player player) {
-        healthBar.setHealth(healthBar.getHealth() - damage);
+    protected void attack(Healthbar healthBar) {
+        healthBar.setCurrentHealth(healthBar.getCurrentHealth() - damage);
     }
 
     protected boolean isFlipped() {

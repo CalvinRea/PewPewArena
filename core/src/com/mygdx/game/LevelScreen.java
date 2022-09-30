@@ -15,8 +15,8 @@ public class LevelScreen extends ScreenAdapter {
     SpriteBatch batch;
     Texture background;
     int originalY;
-    PlayerHealthbar playerHealthbar;
-    BossHealthbar bossHealthbar;
+    Healthbar playerHealthbar;
+    Healthbar bossHealthbar;
     Torch torch;
     UndeadExecutioner undeadExecutioner;
     EvWizzEnemy evWizzEnemy;
@@ -35,8 +35,8 @@ public class LevelScreen extends ScreenAdapter {
         undeadExecutioner = new UndeadExecutioner();
         evWizzEnemy = new EvWizzEnemy();
         torch = new Torch();
-        bossHealthbar = new BossHealthbar(undeadExecutioner.originalHealth);
-        playerHealthbar = new PlayerHealthbar();
+        bossHealthbar = new Healthbar(800,800,undeadExecutioner.originalHealth,39,"Temp assets folder/Sprites/boss healthbar/frame (",").gif");
+        playerHealthbar = new Healthbar(50,Gdx.graphics.getHeight() - 100,10, 11,"Temp assets folder/Sprites/MyHealthbar/",".png");
         batch = new SpriteBatch();
         background = new Texture(Gdx.files.internal("Temp assets folder/Backgrounds/Background" + 1 + ".png"));
         setLocations();
@@ -90,7 +90,7 @@ public class LevelScreen extends ScreenAdapter {
     }
 
     public void graphics() {
-        playerHealthbar.setCurrentTexture(playerHealthbar.getHealth());
+        playerHealthbar.setCurrentTexture(player.getHealth());
         bossHealthbar.setCurrentTexture(undeadExecutioner.health);
 
         flipper();
@@ -107,7 +107,7 @@ public class LevelScreen extends ScreenAdapter {
         batch.draw(torchTexture, 1557, 230, 70, 100);
         batch.draw(playerHealthbar.getCurrentTexture(), playerHealthbar.getX(), playerHealthbar.getY(), 500, 80);
 
-        if (bossHealthbar.bossAlive)
+        if (bossHealthbar.getCurrentHealth()>0)
             batch.draw(bossHealthbar.getCurrentTexture(), bossHealthbar.getX(), bossHealthbar.getY(), 600, 200);
 
         if (evWizzEnemy.alive) {

@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,12 +17,13 @@ public class Player {
     private int state;
     private Texture[][] animationTextures;
     private Animation animation;
-    private double lastHealth;
+    private double health;
     private boolean isMoving;
     private boolean flipped;
     private int xOffSet;
     private boolean alive;
     private int score;
+
 
     public Player() {
         ap9 = new AP9();
@@ -34,7 +34,7 @@ public class Player {
         isJumping = false;
         isMoving = false;
         jumpHeight = 400;
-        lastHealth = 10;
+        health = 10;
         state = 0;
         flipped = false;
         alive = true;
@@ -54,7 +54,7 @@ public class Player {
         animation = new Animation(0.2f, animationTextures[state]);
     }
 
-    public void controls(int originalY, float timeElapsed, PlayerHealthbar healthbar) {
+    public void controls(int originalY, float timeElapsed, Healthbar healthbar) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A) && x > -100) {
             x -= 20;
@@ -92,11 +92,11 @@ public class Player {
         alignHitBoxes();
     }
 
-    public void animate(PlayerHealthbar healthbar,float timeElapsed) {
-        if (healthbar.getHealth() <= 0) {
+    public void animate(Healthbar healthbar,float timeElapsed) {
+        if (healthbar.getCurrentHealth() <= 0) {
             state = 4;
-        } else if (healthbar.getHealth() != lastHealth) {
-            lastHealth = healthbar.getHealth();
+        } else if (healthbar.getCurrentHealth() != health) {
+            health = healthbar.getCurrentHealth();
             state = 3;
         } else if (isJumping) {
             state = 2;
@@ -191,6 +191,10 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public double getHealth() {
+        return health;
     }
 
 }
