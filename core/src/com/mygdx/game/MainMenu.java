@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class MainMenu extends ScreenAdapter {
 
-    MyGdxGame game;
+    static MyGdxGame game;
     Stage stage;
     Table table;
     Texture[] arr;
@@ -31,6 +31,7 @@ public class MainMenu extends ScreenAdapter {
     }
 
     public static void controls() {
+        game.setScreen(new HelpScreen(game));
     }
 
     @Override
