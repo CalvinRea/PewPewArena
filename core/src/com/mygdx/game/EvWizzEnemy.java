@@ -24,7 +24,7 @@ public class EvWizzEnemy extends Enemy {
 
     }
 
-    public Texture[][] populateAnimationTextures() {
+    private Texture[][] populateAnimationTextures() {
 
         Texture[][] temp = {new Texture[8], new Texture[8], new Texture[8], new Texture[4], new Texture[5]};
         return populateAnimationTextures(temp, "Temp assets folder/Sprites/Evil Wizard/");
@@ -63,7 +63,6 @@ public class EvWizzEnemy extends Enemy {
 
                 break;
             case 3:
-
                 break;
             case 4:
                 alive = false;

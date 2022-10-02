@@ -118,20 +118,20 @@ public class LevelScreen extends ScreenAdapter {
         if (undeadExecutioner.alive) {
             Texture undeadExecutionerTexture = undeadExecutioner.enemyAnimation.getKeyFrame(timeElapsed, true);
             batch.draw(undeadExecutionerTexture, undeadExecutioner.x, undeadExecutioner.y, 700, 700, 0, 0, 150, 150, undeadExecutioner.isFlipped(), false);
-            if (undeadExecutioner.undeadProjectiles != null) {
-                for (int i = 0; i < undeadExecutioner.undeadProjectiles.size(); i++) {
-                    batch.draw(undeadExecutioner.undeadProjectiles.get(i).getAnimation().getKeyFrame(timeElapsed),
-                            undeadExecutioner.undeadProjectiles.get(i).x, undeadExecutioner.undeadProjectiles.get(i).y, 150, 150);
+            if (undeadExecutioner.getUndeadProjectiles() != null) {
+                for (int i = 0; i < undeadExecutioner.getUndeadProjectiles().size(); i++) {
+                    batch.draw(undeadExecutioner.getUndeadProjectiles().get(i).getAnimation().getKeyFrame(timeElapsed),
+                            undeadExecutioner.getUndeadProjectiles().get(i).x, undeadExecutioner.getUndeadProjectiles().get(i).y, 150, 150);
                 }
             }
         }
 
         Texture playerTexture = (Texture) player.getAnimation().getKeyFrame(timeElapsed, true);
         batch.draw(playerTexture, player.getX(), player.getY() - 50, 280, 280, 0, 0, 128, 98, player.isFlipped(), false);
-        player.getAp9().sprite.draw(batch);
-        if (player.getAp9().bullets != null) {
-            for (int i = 0; i < player.getAp9().bullets.size(); i++) {
-                batch.draw(player.getAp9().bullets.get(i).animation.getKeyFrame(timeElapsed), player.getAp9().bullets.get(i).x, player.getAp9().bullets.get(i).y, 30, 30);
+        player.getAp9().getSprite().draw(batch);
+        if (player.getAp9().getBullets() != null) {
+            for (int i = 0; i < player.getAp9().getBullets().size(); i++) {
+                batch.draw(player.getAp9().getBullets().get(i).getAnimation().getKeyFrame(timeElapsed), player.getAp9().getBullets().get(i).x, player.getAp9().getBullets().get(i).y, 30, 30);
             }
         }
 
@@ -143,8 +143,8 @@ public class LevelScreen extends ScreenAdapter {
     }
 
     public void damageEnemies() {
-        undeadExecutioner.checkBulletAndPain(player.getAp9().bullets, undeadExecutioner.x, undeadExecutioner.y, player.getAp9().damage);
-        evWizzEnemy.checkBulletAndPain(player.getAp9().bullets, evWizzEnemy.x, evWizzEnemy.y, player.getAp9().damage);
+        undeadExecutioner.checkBulletAndDamage(player.getAp9().getBullets(), undeadExecutioner.x, undeadExecutioner.y, player.getAp9().getDamage());
+        evWizzEnemy.checkBulletAndDamage(player.getAp9().getBullets(), evWizzEnemy.x, evWizzEnemy.y, player.getAp9().getDamage());
         if(player.getScore()==maxScore){
             game.setScreen(new WinScreen(game));
         }

@@ -13,9 +13,9 @@ public class Player {
     private int y;
     private int HitBoxX;
     private int HitBoxY;
-    private int jumpHeight;
+    private final int jumpHeight;
     private int state;
-    private Texture[][] animationTextures;
+    private final Texture[][] animationTextures=populateTextures();
     private Animation animation;
     private double health;
     private boolean isMoving;
@@ -30,7 +30,6 @@ public class Player {
         x = 20;
         y = 20;
         xOffSet = 0;
-        populateTextures();
         isJumping = false;
         isMoving = false;
         jumpHeight = 400;
@@ -39,19 +38,19 @@ public class Player {
         flipped = false;
         alive = true;
         score=0;
+        animation = new Animation(0.2f, animationTextures[state]);
     }
 
 
 
-    public void populateTextures() {
-        animationTextures = new Texture[][]{new Texture[6], new Texture[12], new Texture[14], new Texture[8], new Texture[6]};
-        String filePath = "Temp assets folder/Sprites/Player/";
-        for (int i = 0; i < animationTextures.length; i++) {
-            for (int j = 0; j < animationTextures[i].length; j++) {
-                animationTextures[i][j] = new Texture(Gdx.files.internal(filePath + i + "/frame (" + (j + 1) + ").png"));
+    public Texture[][] populateTextures() {
+        Texture[][] temp = new Texture[][]{new Texture[6], new Texture[12], new Texture[14], new Texture[8], new Texture[6]};
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp[i].length; j++) {
+                temp[i][j] = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Player/" + i + "/frame (" + (j + 1) + ").png"));
             }
         }
-        animation = new Animation(0.2f, animationTextures[state]);
+        return temp;
     }
 
     public void controls(int originalY, float timeElapsed, Healthbar healthbar) {
@@ -132,20 +131,8 @@ public class Player {
         this.y = newY;
     }
 
-    public boolean getJumping() {
-        return isJumping;
-    }
-
-    public void setJumping(boolean jumping) {
-        isJumping = jumping;
-    }
-
     public int getJumpHeight() {
         return jumpHeight;
-    }
-
-    public void setJumpHeight(int jumpHeight) {
-        this.jumpHeight = jumpHeight;
     }
 
     public Animation getAnimation() {
@@ -156,16 +143,8 @@ public class Player {
         return HitBoxX;
     }
 
-    public void setHitBoxX(int hitBoxX) {
-        HitBoxX = hitBoxX;
-    }
-
     public int getHitBoxY() {
         return HitBoxY;
-    }
-
-    public void setHitBoxY(int hitBoxY) {
-        HitBoxY = hitBoxY;
     }
 
     public boolean isFlipped() {
@@ -179,10 +158,6 @@ public class Player {
 
     public boolean isAlive() {
         return alive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
     }
 
     public int getScore() {

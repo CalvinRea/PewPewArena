@@ -6,27 +6,19 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 public class Torch {
 
-    private final Animation<Texture> torchAnimation;
-    private final Texture[] animationTexture;
+    private static final Animation<Texture> torchAnimation=populate();
 
-    public Torch() {
-        this.animationTexture = new Texture[12];
-        populate();
-        this.torchAnimation = new Animation<Texture>(0.15f, animationTexture);
-    }
+    public Torch() {}
 
-    public void populate() {
+    private static Animation<Texture> populate() {
+        Texture[]temp = new Texture[12];
         for (int i = 0; i < 12; i++) {
-            this.animationTexture[i] = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Torch/frame (" + (i + 1) + ").gif"));
+            temp[i] = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Torch/frame (" + (i + 1) + ").gif"));
         }
+        return new Animation<>(0.15f, temp);
     }
 
-    public Animation<Texture> getTorchAnimation() {
+    public static Animation<Texture> getTorchAnimation() {
         return torchAnimation;
     }
-
-    public Texture[] getAnimationTexture() {
-        return animationTexture;
-    }
-
 }

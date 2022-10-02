@@ -13,12 +13,12 @@ public class Healthbar {
     private final int y;
 
 
-    public Healthbar(int inX,int inY,double inOriginalHealth,int length,String filepathStart,String filepathEnd) {
+    public Healthbar(int inX,int inY,double inOriginalHealth,int length,String filePathStart,String filePathEnd) {
         x=inX;
         y=inY;
         originalHealth=inOriginalHealth;
         textures=new Texture[length];
-        populate(filepathStart,filepathEnd);
+        populate(filePathStart,filePathEnd);
         currentTexture=textures[0];
         currentHealth=originalHealth;
     }
@@ -39,10 +39,6 @@ public class Healthbar {
         currentHealth=inCurrentHealth;
     }
 
-    public Texture[] getTextures() {
-        return this.textures;
-    }
-
     public int getX() {
         return x;
     }
@@ -55,7 +51,7 @@ public class Healthbar {
         return currentTexture;
     }
 
-    protected void dispose() {
+    public void dispose() {
         for (Texture t : textures) {
             t.dispose();
         }
@@ -64,7 +60,7 @@ public class Healthbar {
     public void setCurrentTexture(double i) {
         if (i >= 0) {
             currentTexture = textures[(int)((textures.length-1)-Math.ceil(i* (textures.length-1)/originalHealth))];
-        }
+        }else{dispose();}
     }
 
 }

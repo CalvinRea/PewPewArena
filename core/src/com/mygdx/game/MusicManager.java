@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class MusicManager {
     private final ArrayList<Music> musicList = new ArrayList<>();
-
     private int i = 0;
 
     public MusicManager() {

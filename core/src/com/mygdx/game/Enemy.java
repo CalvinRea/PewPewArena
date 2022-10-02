@@ -45,7 +45,7 @@ public class Enemy extends Entity {
         flipped = bool;
     }
 
-    public Texture[][] populateAnimationTextures(Texture[][] temp, String filePath) {
+    protected Texture[][] populateAnimationTextures(Texture[][] temp, String filePath) {
         for (int i = 0; i < temp.length; i++) {
             for (int j = 0; j < temp[i].length; j++) {
                 temp[i][j] = new Texture(Gdx.files.internal(filePath + i + "/frame (" + (j + 1) + ").png"));
@@ -59,7 +59,7 @@ public class Enemy extends Entity {
         setFlipped(0 > playerX - (x + xOffSet));
     }
 
-    public void checkBulletAndPain(ArrayList<AP9Bullet> bullets, int enX, int enY, double damageDone) {
+    public void checkBulletAndDamage(ArrayList<AP9Bullet> bullets, int enX, int enY, double damageDone) {
         for (int i = 0; i < bullets.size(); i++) {
 
             if (Math.abs(enX + hitBoxXOffSet - bullets.get(i).x) < hitBoxX

@@ -10,33 +10,34 @@ import java.util.ArrayList;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 
-public class AP9 extends Gun {
+public class AP9  {//an AP9 is a type of gun
 
-    ArrayList<AP9Bullet> bullets = new ArrayList<>();
+    private ArrayList<AP9Bullet> bullets;
+    private float angle;
+    private final double damage;
+    private Sprite sprite;
+    private Texture shotTexture;
+    private final Animation<Texture> gunShot;
+    private Texture gunTexture;
+    private boolean shooting;
 
     public AP9() {
         damage = 1;
+        bullets=new ArrayList<>();
+        shotTexture = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Gun pack 4/Animations/AP-9/frame (3).gif"));
+        gunShot = new Animation(0.025f, populateAnimationTextures());
+        gunShot.setPlayMode(Animation.PlayMode.LOOP);
+        gunTexture = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Gun pack 4/Animations/AP-9/frame (1).gif"));
         setupSprite();
     }
 
     public void setupSprite() {
-        shotTexture = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Gun pack 4/Animations/AP-9/frame (3).gif"));
-        gunShot = new Animation(0.025f, populateGunAnimationTextures());
-        gunShot.setPlayMode(Animation.PlayMode.LOOP);
-        gunTexture = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Gun pack 4/Animations/AP-9/frame (1).gif"));
         sprite = new Sprite(gunTexture, 375, 250);
         sprite.setSize(100, 100);
         sprite.setOriginCenter();
         sprite.setOriginBasedPosition(1920 / 2f, 1080 / 2f);
         sprite.flip(true, false);
     }
-
-    public Texture[] populateGunAnimationTextures() {
-        Texture[] temp = new Texture[9];
-        return populateAnimationTextures(temp, "Temp assets folder/Sprites/Gun pack 4/Animations/AP-9");
-    }
-
-
     public void updateSprite(float timeElapsed, int playerX, int playerY, boolean flipped) {
 
 
@@ -86,5 +87,24 @@ public class AP9 extends Gun {
             }
         }
     }
+    private Texture[] populateAnimationTextures() {
+      Texture[] temp = new Texture[9];
+        for (int i = 0; i < temp.length; i++) {
+
+            temp[i] = new Texture(Gdx.files.internal("Temp assets folder/Sprites/Gun pack 4/Animations/AP-9/frame (" + (i + 1) + ").gif"));
+        }
+        return temp;
+    }
+
+    public void shoot() {
+
+        shooting = true;
+    }
+
+    public double getDamage(){return damage;}
+
+    public Sprite getSprite(){return sprite;}
+
+    public ArrayList<AP9Bullet> getBullets(){return bullets;}
 
 }

@@ -2,8 +2,7 @@ package com.mygdx.game;
 
 public class Entity {
 
-    protected boolean alive = true;
-
+    protected boolean alive;
     protected int x;
     protected int y;
     protected int xOffSet;
@@ -13,6 +12,7 @@ public class Entity {
     protected double originalHealth;
 
     public Entity() {
+        alive=true;
     }
 
     protected void setPosition(int newX, int newY) {

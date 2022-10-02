@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class UndeadExecutioner extends Enemy {
     private static final int summonDistance=800;//TODO: make more variables static final if constant and the same across objects
     private static final int summonNumber=3;
-    ArrayList<UndeadProjectile> undeadProjectiles;
+    private ArrayList<UndeadProjectile> undeadProjectiles;
 
     public UndeadExecutioner() {
         hitBoxX = 125;
@@ -102,4 +102,6 @@ public class UndeadExecutioner extends Enemy {
         }
         return temp;
     }
+
+    public ArrayList<UndeadProjectile> getUndeadProjectiles(){return undeadProjectiles;}
 }
