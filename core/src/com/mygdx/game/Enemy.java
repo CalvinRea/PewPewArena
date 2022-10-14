@@ -20,12 +20,11 @@ public class Enemy extends Entity {
     protected boolean flipped;
 
 
-    public Enemy() {
-    }
+    public Enemy() {}//constructor used instead of default constructor
 
 
-    protected void move(Player player) {
-        if (player.getHitBoxX() - (x + xOffSet) > 0) {
+    protected void move(int HitBoxX) {//moves the enemy based on the players hitbox position
+        if (HitBoxX - (x + xOffSet) > 0) {
             moveRight(speed);
         } else {
             moveLeft(speed);
@@ -34,18 +33,19 @@ public class Enemy extends Entity {
 
     protected void attack(Healthbar healthBar) {
         healthBar.setCurrentHealth(healthBar.getCurrentHealth() - damage);
-    }
+    }// uses the players healthbar to reduce the health of the player by the enemy's damage
 
-    protected boolean isFlipped() {
+    protected boolean isFlipped() {//returns whether the enemy is currenty flipped or not so that the appropriate textures can be displayed
 
         return flipped;
     }
 
     protected void setFlipped(boolean bool) {
         flipped = bool;
-    }
+    }//setFlipped: sets the flipped attribute to be true or false
 
-    protected Texture[][] populateAnimationTextures(Texture[][] temp, String filePath) {
+    protected Texture[][] populateAnimationTextures(Texture[][] temp, String filePath) {/*populates and returns the animationTextures 2d array with the enemy’s animation
+     textures by using the filepath of the stored textures and a temporary array*/
         for (int i = 0; i < temp.length; i++) {
             for (int j = 0; j < temp[i].length; j++) {
                 temp[i][j] = new Texture(Gdx.files.internal(filePath + i + "/frame (" + (j + 1) + ").png"));
@@ -55,11 +55,12 @@ public class Enemy extends Entity {
         return temp;
     }
 
-    public void flipper(int playerX) {
+    public void flipper(int playerX) {//determines whether the enemy should be flipped or not based on the player’s current x position
         setFlipped(0 > playerX - (x + xOffSet));
     }
 
-    public void checkBulletAndDamage(ArrayList<AP9Bullet> bullets, int enX, int enY, double damageDone) {
+    public void checkBulletAndDamage(ArrayList<AP9Bullet> bullets, int enX, int enY, double damageDone) {/*uses the co-ordinates of the enemy (enX and enY) and the bullet object (and it's co-ordinate) and
+    decreases the enemy health by the value of damageDone*/
         for (int i = 0; i < bullets.size(); i++) {
 
             if (Math.abs(enX + hitBoxXOffSet - bullets.get(i).x) < hitBoxX
@@ -70,11 +71,11 @@ public class Enemy extends Entity {
             }
         }
         if (!alive) {
-            dispose();
+            dispose();//if enemy is dead free up memory using this method
         }
     }
 
-    public void dispose() {
+    public void dispose() {//used to dispose of the enemy animation textures and free up memory
         for (Texture[] animationTexture : animationTextures) {
             for (Texture texture : animationTexture) {
                 texture.dispose();

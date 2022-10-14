@@ -26,13 +26,13 @@ public class UndeadExecutioner extends Enemy {
         speed = 1;
         state = 0;
         enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
-    }
+    }//used to initialise the attributes of the class
 
     public Texture[][] populateSpecificAnimationTextures() {
 
         Texture[][] temp = {new Texture[8], new Texture[8], new Texture[13], new Texture[12], new Texture[18]};
         return populateAnimationTextures(temp, "Temp assets folder/Sprites/Undead executioner/");
-    }
+    }//used to specify the size of each individual array based on how many textures there are per animation
 
     public void ai(Player player, Healthbar playerHealthbar, float timeElapsed) {
         //States 4-death , 3-summon , 2-attack , 1-move , 0-idle
@@ -63,7 +63,7 @@ public class UndeadExecutioner extends Enemy {
                 break;
             case 1:
                 enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
-                move(player);
+                move(player.getHitBoxX());
                 break;
             case 2:
                 enemyAnimation = new Animation<>(0.2f, animationTextures[state]);
@@ -93,7 +93,7 @@ public class UndeadExecutioner extends Enemy {
             i++;
         }
 
-    }
+    }//used to determine what state the undead executioner is in, whether it will move, attack, etc.
 
     public ArrayList<UndeadProjectile> summon() {
         ArrayList<UndeadProjectile> temp = new ArrayList<>(3);
@@ -101,7 +101,7 @@ public class UndeadExecutioner extends Enemy {
             temp.add(new UndeadProjectile(flipped, x + xOffSet, y + yOffSet, i + 1));
         }
         return temp;
-    }
+    }//used to summon undead projectiles and return an array list of them
 
-    public ArrayList<UndeadProjectile> getUndeadProjectiles(){return undeadProjectiles;}
+    public ArrayList<UndeadProjectile> getUndeadProjectiles(){return undeadProjectiles;}//returns an arraylist of the current undead projectiles
 }

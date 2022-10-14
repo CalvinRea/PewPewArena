@@ -22,18 +22,19 @@ public class HelpScreen extends ScreenAdapter {
 
     public HelpScreen(MyGdxGame game) {
         this.game = game;
-    }
+    }//used to set the classes MyGdxGame to
+    // the current game and update which screen is to be displayed
 
     @Override
-    public void show() {
+    public void show() {//like create method but runs on screens instantiation like a constructor
         timeElapsed = 0f;
         stage = new Stage();
         batch = new SpriteBatch();
         background = new Texture("Temp assets folder/Backgrounds/helpBackground.png");
         stageInitializer();
-    }//like create method
+    }
 
-    public void stageInitializer() {
+    public void stageInitializer() {//used to initialise the stage and set the stage to be the current input processor
         Gdx.input.setInputProcessor(stage);
         table = new Table();
         table.setFillParent(true);//size to stage
@@ -42,7 +43,7 @@ public class HelpScreen extends ScreenAdapter {
 
     }
 
-    public Table tableInitializer() {
+    public Table tableInitializer() {//used to create a table object and change its layout and add buttons,specific fonts etc to the table before it is returned
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.fontColor = (Color.WHITE);
         buttonStyle.font = new BitmapFont(Gdx.files.internal("Temp assets folder/GameFont.fnt"));
@@ -64,13 +65,13 @@ public class HelpScreen extends ScreenAdapter {
     }//call after done with screen
 
     @Override
-    public void dispose() {
+    public void dispose() {//call to dispose textures etc. and free up memory
         batch.dispose();
         stage.dispose();
-    }//call to dispose
+    }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta) {//renders the current animations/textures to the screen based on the time that has passed
         batch.begin();
         batch.draw(background, 0, 0, 1920, 1080);
         batch.end();

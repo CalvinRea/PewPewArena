@@ -39,9 +39,7 @@ public class Player {
         alive = true;
         score=0;
         animation = new Animation(0.2f, animationTextures[state]);
-    }
-
-
+    }//used to initialise the attributes of the class
 
     public Texture[][] populateTextures() {
         Texture[][] temp = new Texture[][]{new Texture[6], new Texture[12], new Texture[14], new Texture[8], new Texture[6]};
@@ -51,7 +49,7 @@ public class Player {
             }
         }
         return temp;
-    }
+    }//Used to initialise the player’s animation textures
 
     public void controls(int originalY, float timeElapsed, Healthbar healthbar) {
 
@@ -89,7 +87,7 @@ public class Player {
         ap9.updateSprite(timeElapsed, getX(), getY(), flipped);
         animate(healthbar,timeElapsed);
         alignHitBoxes();
-    }
+    }//Takes input from the user and outputs the appropriate action: movement, shooting, jumping etc.
 
     public void animate(Healthbar healthbar,float timeElapsed) {
         if (healthbar.getCurrentHealth() <= 0) {
@@ -110,67 +108,68 @@ public class Player {
             alive=false;
         }
 
-    }
+    }//is used to change the player animation based on the current player state
+
     public AP9 getAp9() {
         return ap9;
-    }
+    }//returns the players ap9
 
     public int getX() {
         return x;
-    }
+    }//returns the players x co-ordinate
 
     public void setX(int newX) {
         this.x = newX;
-    }
+    }//sets the players x co-ordinate to a new x co-ordinate
 
     public int getY() {
         return y;
-    }
+    }//returns the players y co-ordinate
 
     public void setY(int newY) {
         this.y = newY;
-    }
+    }//sets the players y co-ordinate to a new y co-ordinate (newY)
 
     public int getJumpHeight() {
         return jumpHeight;
-    }
+    }//returns the players jump height
 
     public Animation getAnimation() {
         return animation;
-    }
+    }//returns the animation attribute
 
     public int getHitBoxX() {
         return HitBoxX;
-    }
+    }//returns the HitBoxX attribute
 
     public int getHitBoxY() {
         return HitBoxY;
-    }
+    }//returns the HitBoxY attribute
 
     public boolean isFlipped() {
         return flipped;
-    }
+    }//returns the flipped attribute
 
     public void alignHitBoxes() {
         HitBoxX = x + xOffSet;
         HitBoxY = y;
-    }
+    }//used to update the players hitboxes based on the players’ current position
 
     public boolean isAlive() {
         return alive;
-    }
+    }//returns the alive attribute
 
     public int getScore() {
         return score;
-    }
+    }//returns the score attribute
 
     public void setScore(int score) {
         this.score = score;
-    }
+    }//sets the score attribute to a new value
 
     public double getHealth() {
         return health;
-    }
+    }//returns the players current health
 
 }
 

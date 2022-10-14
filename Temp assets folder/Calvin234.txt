@@ -1,2 +1,0 @@
-Player inventory:
-Player location:1

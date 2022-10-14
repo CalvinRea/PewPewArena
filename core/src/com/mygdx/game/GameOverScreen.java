@@ -24,7 +24,8 @@ public class GameOverScreen extends ScreenAdapter {
     int numFrames;
     Animation<Texture> gameOver;
 
-    public GameOverScreen(MyGdxGame game) {
+    public GameOverScreen(MyGdxGame game) {//used to set the classes MyGdxGame to
+        // the current game and update which screen is to be displayed
         this.game = game;
 
     }
@@ -39,7 +40,7 @@ public class GameOverScreen extends ScreenAdapter {
         populateTextArray();
         gameOver = new Animation<>(0.2f, arr);
         stageInitializer();
-    }//like create method
+    }//like create method but runs on screens instantiation like a constructor
 
     @Override
     public void render(float delta) {
@@ -50,7 +51,7 @@ public class GameOverScreen extends ScreenAdapter {
         batch.end();
         stage.act(timeElapsed);
         stage.draw();
-    }
+    }//renders the current animations/textures to the screen based on the time that has passed (delta)
 
     public void populateTextArray() {
         for (int j = 0; j < numFrames; j++) {
@@ -60,7 +61,7 @@ public class GameOverScreen extends ScreenAdapter {
                 arr[j] = new Texture("Temp assets folder/Backgrounds/GameOver/frame_" + j + "_delay-0.2s.gif");
             }
         }
-    }
+    }//used to populate arr texture array with textures
 
     public void stageInitializer() {
         Gdx.input.setInputProcessor(stage);
@@ -69,7 +70,7 @@ public class GameOverScreen extends ScreenAdapter {
         table = tableInitializer();
         stage.addActor(table);
 
-    }
+    }//used to initialise the stage and set the stage to be the current input processor
 
     public Table tableInitializer() {
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
@@ -86,16 +87,16 @@ public class GameOverScreen extends ScreenAdapter {
 
         table.add(btnBack).size(stage.getWidth() / 2, stage.getHeight() / 2).padTop(500);
         return table;
-    }
+    }//used to create a table object and change its layout and add buttons,specific fonts etc to the table before it is returned
 
     @Override
     public void hide() {
         dispose();
-    }//call after done with screen
+    }//called after done with screen
 
     @Override
     public void dispose() {
         batch.dispose();
         stage.dispose();
-    }//call to dispose
+    }//call to dispose textures etc. and free up memory
 }

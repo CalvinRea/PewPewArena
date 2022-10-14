@@ -24,7 +24,8 @@ public class WinScreen extends ScreenAdapter {
     int numFrames;
     Animation<Texture> winScreen;
 
-    public WinScreen(MyGdxGame game) {
+    public WinScreen(MyGdxGame game) {//used to set the classes MyGdxGame to
+        // the current game and update which screen is to be displayed
         this.game = game;
 
     }
@@ -39,7 +40,7 @@ public class WinScreen extends ScreenAdapter {
         populateTextArray();
         winScreen = new Animation<>(0.08f, arr);
         stageInitializer();
-    }//like create method
+    }//like create method but runs on screens instantiation like a constructor
 
     @Override
     public void render(float delta) {
@@ -50,7 +51,7 @@ public class WinScreen extends ScreenAdapter {
         batch.end();
         stage.act(timeElapsed);
         stage.draw();
-    }
+    }//renders the current animations/textures to the screen based on the time that has passed (delta)
 
     public void populateTextArray() {
         for (int j = 0; j < numFrames; j++) {
@@ -60,7 +61,7 @@ public class WinScreen extends ScreenAdapter {
                 arr[j] = new Texture("Temp assets folder/Backgrounds/WinScreen/frame_" + j + "_delay-0.08s.gif");
             }
         }
-    }
+    }//used to populate arr texture array with textures
 
     public void stageInitializer() {
         Gdx.input.setInputProcessor(stage);
@@ -69,7 +70,7 @@ public class WinScreen extends ScreenAdapter {
         table = tableInitializer();
         stage.addActor(table);
 
-    }
+    }//used to initialise the stage and set the stage to be the current input processor
 
     public Table tableInitializer() {
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
@@ -85,7 +86,7 @@ public class WinScreen extends ScreenAdapter {
         });
         table.add(btnBack).uniform(true).size(stage.getWidth() / 2, stage.getHeight() / 2);
         return table;
-    }
+    }//used to create a table object and change its layout and add buttons,specific fonts etc to the table before it is returned
 
     @Override
     public void hide() {

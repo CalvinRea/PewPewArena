@@ -42,7 +42,8 @@ public class UndeadProjectile extends Projectile {
                 y = undeadY + 600;
                 break;
         }
-    }
+    }//used to initialise the classes attributes based on whether
+    // the undead executioner is flipped and it's position and the projectiles summon number
 
     public void ai(Player player, Healthbar playerHealthbar, float timeElapsed) {
 
@@ -56,7 +57,9 @@ public class UndeadProjectile extends Projectile {
         }
         move(player);
 
-    }
+    }//used to implement the projectiles ai for tracking/damaging the player
+    //uses the player object and player healthbar aswell as time elapsed to determine what it should do
+
     protected void move(Player player) {
         if (tracking) {
             if (player.getHitBoxX() - (x - xOffSet) > 0) {
@@ -71,12 +74,13 @@ public class UndeadProjectile extends Projectile {
                 moveDown(speedY);
             }
         }
-    }
+    }//used to move the projectile towards the player
+    // and check whether it is still on screen
 
     protected void attack(Healthbar playerHealthbar, Player player) {
         playerHealthbar.setCurrentHealth(playerHealthbar.getCurrentHealth() - damage);
         alive = false;
-    }
+    }//used to damage the player and thus reduce the playerHealthbar
 
     public static Texture[][] populate() {
         Texture[][] temp = {new Texture[4], new Texture[6]};
@@ -87,10 +91,9 @@ public class UndeadProjectile extends Projectile {
 
         }
         return temp;
-    }
+    }//used to initialise the animation textures by returning a multidimensional texture array
 
     public static Animation<Texture> getAnimation() {
         return animation;
-    }
+    }//returns the current animation
 }
-

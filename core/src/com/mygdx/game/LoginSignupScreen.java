@@ -49,7 +49,8 @@ public class LoginSignupScreen extends ScreenAdapter {
 
     public LoginSignupScreen(MyGdxGame game) {
         this.game = game;
-    }
+    }//used to set the classes MyGdxGame to
+    // the current game and update which screen is to be displayed
 
     @Override
     public void show() {
@@ -64,20 +65,20 @@ public class LoginSignupScreen extends ScreenAdapter {
         populateList();
         stageInitializer();
 
-    }
+    }//like create method but runs on screens instantiation like a constructor
 
     public void populateTextArray() {
         for (int j = 0; j < logNumFrames; j++) {
             logTextures[j] = new Texture("Temp assets folder/frames/frame (" + (j + 1) + ").png");
         }
-    }
+    }//used to populate arr texture array with textures
 
     public void stageInitializer() {
         logStage = new Stage();
         Gdx.input.setInputProcessor(logStage);
         tableInitializer();
         logStage.addActor(logTable);
-    }
+    }//used to initialise the stage and set the stage to be the current input processor
 
     public void tableInitializer() {
         age = 0;
@@ -290,7 +291,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         logTable.row();
         logTable.add(chkRobot).getActor().getImage().setScale(0.5f);
 
-    }
+    }//used to create a table object and change its layout and add buttons,specific fonts etc to the table before it is returned
 
     @Override
     public void render(float delta) {
@@ -305,19 +306,19 @@ public class LoginSignupScreen extends ScreenAdapter {
             updateLabels();
         }
 
-    }
+    }//renders the current animations/textures to the screen based on the time that has passed (delta)
 
     @Override
     public void hide() {
         dispose();
-    }
+    }//called after done with screen
 
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);
         logBatch.dispose();
         logStage.dispose();
-    }
+    }//call to dispose textures etc. and free up memory
 
     public void populateList() {
         usernames = new String[5];
@@ -339,7 +340,8 @@ public class LoginSignupScreen extends ScreenAdapter {
         }
 
 
-    }
+    }//populates usernames and passwords arrays with
+    // the usernames and passwords by reading them in from the text file
 
     public int searchUser() {
         int index = -1;
@@ -351,10 +353,12 @@ public class LoginSignupScreen extends ScreenAdapter {
             j++;
         }
         return index;
-    }
+    }//searches whether the username does or does not exist,
+    // returns index where username exists or -1 if the user does not exist
 
-    public boolean searchUserAndPass() {
-        //used by login
+    public boolean searchUserAndPass() {//used to identify whether the username exists and the password entered is correct
+        //returns false if the log-in process was unsuccessful and true if it was successful
+
         int index = searchUser();
         boolean bool = false;
         if (index == -1) {
@@ -391,7 +395,7 @@ public class LoginSignupScreen extends ScreenAdapter {
 
         }
 
-    }
+    }//used to write the new username and password to the textfile
 
     public boolean checkAge() {
         if (age < 8) {
@@ -399,7 +403,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         } else {
             return calculateAge() == age;
         }
-    }
+    }//used to check whether the user meets the age limit, if the user does then true is returned, if not false is returned
 
     public int calculateAge() {
         int monthBirth = 0;
@@ -459,7 +463,7 @@ public class LoginSignupScreen extends ScreenAdapter {
         }
 
         return calculatedAge;
-    }
+    }//returns the users current age based on the birthdate they entered
 
     public boolean isWithinRange() {
         boolean bool = false;
@@ -512,12 +516,12 @@ public class LoginSignupScreen extends ScreenAdapter {
             bool = true;
         }
         return bool;
-    }
+    }//used to check whether the entered day of the month exists, returns true if it does, false if it doesn't
 
     public void updateLabels() {
         lblErr.setText(error);
         lblAge.setText(age + "");
-    }
+    }//updates the error label to display the current error message
 
 
 }

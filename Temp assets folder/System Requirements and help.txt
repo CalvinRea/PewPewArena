@@ -1,0 +1,19 @@
+Hardware Requirements
+
+The minimum hardware requirements are as follows:
+General: Memory - 300MB RAM, Storage - 200MB free space
+PC: Processor – Intel Core I3 M380 or later, mouse and keyboard
+Mobile: Mobile phone capable of running android 8 or IOS 10 or later, working screen.
+
+Software Requirements
+
+OS: Windows 7, android 8, IOS 10 or newer
+Access to the itch.io website on desktop, Google play store on android or App store on IOS.
+Android is preferred over IOS as the app approval process on the IOS app store is tedious and random at best. (Carles Capellas, 2021)
+No IDE or secondary software is required nor is text file reading and manipulation as it is already built into the above operating systems.
+
+What to do if the game crashes?
+Open task manager and make sure you have sufficient memory to run the game and also try deleting the UsernamesPasswords textfile.
+
+What to do if the game freezes?
+Just wait. Do not click the screen. The game has not crashed and is just loading.

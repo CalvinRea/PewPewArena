@@ -22,7 +22,7 @@ public class LevelScreen extends ScreenAdapter {
     EvWizzEnemy evWizzEnemy;
     float timeElapsed = 0;
 
-    public LevelScreen(MyGdxGame game, Player player) {
+    public LevelScreen(MyGdxGame game, Player player) {//constructor used to initialise the player and game fields by parsing them in
         this.game = game;
         this.player = player;
 
@@ -43,7 +43,7 @@ public class LevelScreen extends ScreenAdapter {
 
         ScreenUtils.clear(Color.CLEAR);
 
-    }
+    }//similar to a constructor this method runs when the screen is created and is used to initialize many screen attributes
 
     @Override
     public void render(float Delta) {
@@ -53,19 +53,20 @@ public class LevelScreen extends ScreenAdapter {
         damageEnemies();
         aiThink();
         musicManager.playMusic();
-    }
+    }//the main game loop that runs through the many methods required to play the game
+    // based on Delta which is the time that has paassed
 
 
     @Override
     public void hide() {
         dispose();
-    }//call after done with screen
+    }//called after done with screen
 
     @Override
     public void dispose() {
         musicManager.dispose();
         batch.dispose();
-    }//call to dispose
+    }//called to dispose assets and free up memory
 
     public void flipper() {
         int playerX = player.getX();
@@ -76,7 +77,7 @@ public class LevelScreen extends ScreenAdapter {
             undeadExecutioner.flipper(playerX);
         }
 
-    }
+    }//flips enemy sprites to face the player
 
 
     public void aiThink() {
@@ -87,7 +88,7 @@ public class LevelScreen extends ScreenAdapter {
             undeadExecutioner.ai(player, playerHealthbar, timeElapsed);
         }
 
-    }
+    }//calls all enemy ais to run
 
     public void graphics() {
         playerHealthbar.setCurrentTexture(player.getHealth());
@@ -140,7 +141,7 @@ public class LevelScreen extends ScreenAdapter {
         if(!player.isAlive()&&player.getAnimation().isAnimationFinished(timeElapsed)){
             game.setScreen(new GameOverScreen(game));
         }
-    }
+    }//displays all enemy,player,background textures,animations etc to the screen
 
     public void damageEnemies() {
         undeadExecutioner.checkBulletAndDamage(player.getAp9().getBullets(), undeadExecutioner.x, undeadExecutioner.y, player.getAp9().getDamage());
@@ -148,7 +149,7 @@ public class LevelScreen extends ScreenAdapter {
         if(player.getScore()==maxScore){
             game.setScreen(new WinScreen(game));
         }
-    }
+    }//checks and damages all enemies that come into contact with the players bullets
 
     public void setLocations() {
         player.setX(100);
@@ -158,11 +159,11 @@ public class LevelScreen extends ScreenAdapter {
         evWizzEnemy.x = 900;
         undeadExecutioner.x = 500;
         undeadExecutioner.y = -250;
-    }
+    }//sets the spawn locations of the enemies
 
     public void setupMusic() {
         musicManager = new MusicManager();
         musicManager.playMusic();
-    }
+    }//creates a music manager object used to manage the music played in this screen
 
 }

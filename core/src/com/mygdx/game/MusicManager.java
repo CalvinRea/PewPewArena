@@ -16,14 +16,14 @@ public class MusicManager {
             m.setVolume(1f);
             m.setLooping(false);
         }
-    }
+    }//used to initialise the fields of a music manager object
 
     public void playMusic() {
         if (i == musicList.size())
             i = 0;
         if (musicList.size()!=0&&(i == 0 || !musicList.get(i - 1).isPlaying()))
             musicList.get(i).play();
-    }
+    }//used to access a music object and play the music
 
     public void dispose() {
  int k = musicList.size();
@@ -34,5 +34,5 @@ public class MusicManager {
             k--;
         }
 
-    }
+    }//used to free up memory by disposing of the music objects in the MUSICLIST
 }
